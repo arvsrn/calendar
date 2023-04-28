@@ -26,7 +26,8 @@
         background: #202020;
     }
 
-    main::-webkit-scrollbar {
+    main::-webkit-scrollbar,
+    div.container::-webkit-scrollbar {
         display: none;
     }
 
