@@ -68,7 +68,7 @@
         flex-direction: column;
         padding: 25px 100px;
 
-        overflow: scroll;
+        overflow: auto;
     }
 
     .viewport {

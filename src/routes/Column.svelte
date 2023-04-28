@@ -26,6 +26,10 @@
         background: #202020;
     }
 
+    main::-webkit-scrollbar {
+        display: none;
+    }
+
     div.container {
         height: 100%;
         width: 100%;
