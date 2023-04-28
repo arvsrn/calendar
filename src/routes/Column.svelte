@@ -6,7 +6,7 @@
 <main class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])}>
     <p>{date}</p>
 
-    <div class="container">
+    <div class="container" on:scroll|preventDefault={() => {}}>
         <slot></slot>
         {#each [...Array(24).keys()] as _}
         <div class="divider"></div>
@@ -41,7 +41,7 @@
         flex-direction: column;
         gap: 60px;
         
-        overflow: scroll;
+        overflow: hidden;
         border-right: 1px solid rgba(255, 255, 255, 0.05);
     }
 
