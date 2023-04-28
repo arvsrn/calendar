@@ -2,11 +2,11 @@
     export let percentage: number = 0;
 </script>
 
-<main style:margin-top="6px">
+<main style:margin-top="6px" style:margin-left="24px">
     <container>
         <div style:width="{percentage}%"></div>
     </container>
-    <p>{percentage}% tasks completed {percentage === 100 ? '🥳' : ''}</p>
+    <p>{percentage}% Finished {percentage === 100 ? '🥳' : ''}</p>
 </main>
 
 <style>
@@ -15,7 +15,7 @@
         flex-direction: column;
         gap: 2.5px;
 
-        width: 100%;
+        width: calc(100% - 24px);
         height: fit-content;
     }
     

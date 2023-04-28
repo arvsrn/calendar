@@ -1,13 +1,18 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    import Calendar from "./Calendar.svelte";
+    import Calendar from "./Viewport.svelte";
     import Column from "./Column.svelte";
     import EventComponent from "./Event.svelte";
-    import DateBar from "./DateBar.svelte";
     import TimeBar from "./TimeBar.svelte";
     import Sidebar from "./Sidebar.svelte";
     import Navbar from "./Navbar.svelte";
+    import Blanket from "./Primitives/Blanket.svelte";
+    import Popup from "./Popup.svelte";
+    import Button from "./Primitives/Button.svelte";
+    import TextInput from "./Primitives/TextInput.svelte";
+    import EditTask from "./Popups/EditTask.svelte";
+    import DeleteTask from "./Popups/DeleteTask.svelte";
 
     const hoursToMinutes = (hours: number, minutes: number = 0) => hours * 60 + minutes;
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -75,7 +80,7 @@
     }
 
     .viewport {
-        width: 100%;
+        width: calc(100% - 271px);
         height: calc(100vh - 50px);
 
         display: flex;

@@ -1,0 +1,58 @@
+<script lang="ts">
+    export function clickOutside(node: HTMLElement, handler: () => void): { destroy: () => void } {
+        const onClick = (event: MouseEvent) => node &&
+            !node.contains(event.target as HTMLElement) &&
+            !event.defaultPrevented &&
+            handler();
+
+        document.addEventListener('click', onClick, true);
+
+        return {
+            destroy: () => document.removeEventListener('click', onClick, true),
+        };
+    }
+
+    export let onClickOutside: () => void = () => {};
+</script>
+
+<main use:clickOutside={onClickOutside}>
+    <slot></slot>
+</main>
+
+<style>
+    main {
+        overflow: hidden;
+        outline: none;
+        background: #232323;
+        
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        box-shadow: 0px 13px 5px rgba(0, 0, 0, 0.01), 
+            0px 7px 4px rgba(0, 0, 0, 0.05), 
+            0px 3px 3px rgba(0, 0, 0, 0.09), 
+            0px 1px 2px rgba(0, 0, 0, 0.1), 
+            0px 0px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+
+        width: 100%;
+        height: fit-content;
+        padding: 4px 0px;
+
+        display: flex;
+        flex-direction: column;
+
+        animation: enter 0.05s ease-out 1;
+        z-index: 289000;
+    }
+
+    @keyframes enter {
+        0% {
+            transform: translateY(-10px);
+            opacity: 60%;  
+        }
+
+        100% {
+            transform: translateY(0px);
+            opacity: 100%;
+        }
+    }
+</style>

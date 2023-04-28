@@ -16,7 +16,7 @@
 
 <style>
     main {
-        width: 200px;
+        width: calc((100% - 30px) / var(--viewport-days));
         height: 1490px;
 
         flex: none;
@@ -53,7 +53,7 @@
     }
 
     p {
-        width: 200px;
+        width: 100%;
         height: 28px;
 
         text-align: center;
