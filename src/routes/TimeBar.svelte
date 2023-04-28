@@ -1,6 +1,6 @@
 <main id="timebar">
-    {#each [...Array(25).keys()] as i}
-    <p>{i}AM</p>
+    {#each [...Array(24).keys()] as i}
+    <p>{(i < 12 ? i : i - 12) || 12}{i < 12 ? 'AM' : 'PM'}</p>
     {/each}
 </main>
 
@@ -19,6 +19,7 @@
 
         height: fit-content;
         padding-top: 28px;
+        padding-bottom: 60px;
 
         position: sticky;
         left: 0;
@@ -36,5 +37,6 @@
 
         font-family: var(--font-mono);
         color: rgba(255, 255, 255, 0.7);
+        user-select: none;
     }
 </style>

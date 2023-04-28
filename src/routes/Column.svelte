@@ -17,7 +17,7 @@
 <style>
     main {
         width: 200px;
-        height: 1440px;
+        height: 1490px;
 
         flex: none;
     }
@@ -32,7 +32,7 @@
     }
 
     div.container {
-        height: 100%;
+        height: calc(100% - 28px);
         width: 100%;
         padding: 0px 2px;
 

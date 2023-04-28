@@ -6,6 +6,8 @@
     import EventComponent from "./Event.svelte";
     import DateBar from "./DateBar.svelte";
     import TimeBar from "./TimeBar.svelte";
+    import Sidebar from "./Sidebar.svelte";
+    import Navbar from "./Navbar.svelte";
 
     const hoursToMinutes = (hours: number, minutes: number = 0) => hours * 60 + minutes;
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -40,7 +42,9 @@
 </script>
 
 <main>
+    <Sidebar></Sidebar>
     <div class="viewport">
+        <Navbar></Navbar>
         <div class="viewport-inner">
             <Calendar>
                 <TimeBar></TimeBar>
@@ -65,15 +69,14 @@
         height: 100vh;
         
         display: flex;
-        flex-direction: column;
-        padding: 25px 100px;
+        flex-direction: row;
 
         overflow: auto;
     }
 
     .viewport {
         width: 100%;
-        height: 100%;
+        height: calc(100vh - 50px);
 
         display: flex;
         flex-direction: column;
