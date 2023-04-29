@@ -11,9 +11,6 @@
 
         display: flex;
         flex-direction: row;
-
-        /* why does this not work */
-        scroll-snap-type: y mandatory;
     }
 
     main::-webkit-scrollbar {

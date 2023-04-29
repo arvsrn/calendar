@@ -92,4 +92,10 @@
         display: flex;
         flex-direction: row;
     }
+
+    @media only screen and (max-width: 500px) {
+        .viewport {
+            width: 100%;
+        }
+    }
 </style>

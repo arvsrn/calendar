@@ -1,5 +1,6 @@
 <script lang="ts">
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
     export let date: string = "";
 </script>
 
@@ -17,9 +18,10 @@
 <style>
     main {
         width: calc((100% - 30px) / var(--viewport-days));
-        height: 1490px;
+        height: 1468px;
 
         flex: none;
+        position: relative;
     }
 
     main.dark {
@@ -70,9 +72,8 @@
         position: sticky;
         top: 0;
         background: #232323;
-        z-index: 2;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.025);
-        z-index: 4;
+        z-index: 6;
     }
 </style>

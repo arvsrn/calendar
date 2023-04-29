@@ -16,7 +16,7 @@
 
         background: rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(1.1px);
-        z-index: 200;
+        z-index: 100;
 
         position: fixed;
         top: 0px;
@@ -25,5 +25,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        pointer-events: all;
     }
 </style>

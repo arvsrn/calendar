@@ -41,7 +41,7 @@
         flex-direction: column;
 
         animation: enter 0.05s ease-out 1;
-        z-index: 289000;
+        z-index: 10;
     }
 
     @keyframes enter {

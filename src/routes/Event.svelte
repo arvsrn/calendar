@@ -10,23 +10,35 @@
     export let startTime: number;
     export let endTime: number;
 
-    const onDragStart = (direction: Dragging) => dragging = dragging === Dragging.NONE ? direction : Dragging.NONE;
+    const onDragStart = (direction: Dragging) => dragging = (dragging === Dragging.NONE ? direction : Dragging.NONE);
     const onDragEnd = () => dragging = Dragging.NONE;
     const onDragging = (event: MouseEvent) => {
         console.log(event.movementY);
 
         switch (dragging) {
             case Dragging.BOTTOM:
-                endTime += event.movementY;
+                if (endTime + event.movementY < 1440)
+                    endTime += event.movementY;
+                else endTime = 0;
+
                 break;
             
             case Dragging.TOP:
-                startTime += event.movementY;
+                if (startTime + event.movementY > 0)
+                    startTime += event.movementY;
+                else startTime = 0;
+
                 break;
             
             case Dragging.SELF:
-                startTime += event.movementY;
-                endTime += event.movementY;
+                if (startTime + event.movementY > 0 && endTime + event.movementY < 1440) {
+                    startTime += event.movementY;
+                    endTime += event.movementY;
+                } else if (startTime + event.movementY < 0) {
+                    startTime = 0;
+                } else if (endTime + event.movementY > 1440) {
+                    endTime = 1440;
+                }
         }
     };
 
@@ -37,6 +49,9 @@
     $: height = (endTime - startTime);
     $: console.log(dragging);
     $: console.log(height);
+
+    // $: startTime, startTime = Math.max(startTime, 0);
+    // $: endTime, endTime = Math.min(endTime, 1440);
 
     let editing: boolean = false;
 </script>
@@ -74,7 +89,7 @@
 
 {#if editing}
 <Blanket bind:toggle={editing}>
-    <Popup>
+    <Popup onSlideOut={() => editing = false}>
         <h1 style="margin-bottom:8px;font-size:14px;color:#ededed;font-weight:bold;">Edit Event</h1>
         <TextInput placeholder="Event name"></TextInput>
         <TextInput placeholder="Event description"></TextInput>
@@ -104,7 +119,7 @@
         cursor: pointer;
         position: relative;
         overflow: hidden;
-        z-index: 3;
+        z-index: 2;
     }
 
     div.side-color {

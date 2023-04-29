@@ -91,4 +91,10 @@
         color: #a0a0a0;
         margin-top: -14px;
     }
+
+    @media only screen and (max-width: 500px) {
+        main {
+            display: none;
+        }
+    }
 </style>

@@ -21,7 +21,7 @@
     
     container {
         width: 100%;
-        height: 5px;
+        height: 4px;
         
         border-radius: 5px;
         background: rgba(255, 255, 255, 0.05);
