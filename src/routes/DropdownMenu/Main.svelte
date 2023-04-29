@@ -6,6 +6,7 @@
             handler();
 
         document.addEventListener('click', onClick, true);
+        document.addEventListener('contextmenu', onClick, true);
 
         return {
             destroy: () => document.removeEventListener('click', onClick, true),
@@ -41,7 +42,7 @@
         flex-direction: column;
 
         animation: enter 0.05s ease-out 1;
-        z-index: 10;
+        z-index: 101;
     }
 
     @keyframes enter {

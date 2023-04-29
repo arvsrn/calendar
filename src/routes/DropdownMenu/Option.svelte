@@ -1,8 +1,9 @@
 <script lang="ts">
     export let label: string = "";
+    export let onClick: () => void = () => {};
 </script>
 
-<main>
+<main on:click={onClick}>
     <slot></slot>
 
     {#if label}

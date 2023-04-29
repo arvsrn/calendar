@@ -16,7 +16,7 @@
         {/each}
 
         <p style:top="{60 * (current.getHours() + current.getMinutes()/60)}px" class="currentTime">
-            {current.getHours()}{current.getMinutes() !== 0 ? `:${current.getMinutes()}` : ''}{current.getHours() > 12 ? 'PM' : 'AM'}
+            {current.getHours() > 12 ? current.getHours() - 12 : current.getHours()}{current.getMinutes() !== 0 ? `:${current.getMinutes() < 10 ? '0' + current.getMinutes() : current.getMinutes()}` : ''}{current.getHours() >= 12 ? 'PM' : 'AM'}
         </p>
     </div>    
 </main>

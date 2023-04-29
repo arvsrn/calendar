@@ -4,36 +4,46 @@
     import Blanket from "./Primitives/Blanket.svelte";
     import Popup from "./Popup.svelte";
     import TextInput from "./Primitives/TextInput.svelte";
+    import Main from "./DropdownMenu/Main.svelte";
+    import Option from "./DropdownMenu/Option.svelte";
 
     const enum Dragging { TOP, BOTTOM, SELF, NONE };
 
     export let startTime: number;
     export let endTime: number;
 
+    let finalEndTime: number = endTime - (endTime % 15)
+    let finalStartTime: number = startTime - (startTime % 15);
+
+    let mouse: [number, number] = [0, 0];
+
     const onDragStart = (direction: Dragging) => dragging = (dragging === Dragging.NONE ? direction : Dragging.NONE);
     const onDragEnd = () => dragging = Dragging.NONE;
     const onDragging = (event: MouseEvent) => {
-        console.log(event.movementY);
-
         switch (dragging) {
             case Dragging.BOTTOM:
-                if (endTime + event.movementY < 1440)
-                    endTime += event.movementY;
-                else endTime = 0;
+                if (((endTime + event.movementY) - startTime) >= 15) {
+                    if (endTime + event.movementY < 1440)
+                        endTime += event.movementY;
+                    else endTime = 0;
 
-                break;
+                    break;
+                }
             
             case Dragging.TOP:
-                if (startTime + event.movementY > 0)
-                    startTime += event.movementY;
-                else startTime = 0;
+                if (endTime - (startTime + event.movementY) >= 15) {
+                    if (startTime + event.movementY > 0)
+                        startTime += event.movementY;
+                    else startTime = 0;
 
-                break;
+                    break;
+                }
             
             case Dragging.SELF:
                 if (startTime + event.movementY > 0 && endTime + event.movementY < 1440) {
+                    const height_ = height;
                     startTime += event.movementY;
-                    endTime += event.movementY;
+                    endTime = startTime + height_;
                 } else if (startTime + event.movementY < 0) {
                     startTime = 0;
                 } else if (endTime + event.movementY > 1440) {
@@ -46,42 +56,66 @@
     let height: number = (endTime - startTime);
     let self: HTMLElement;
 
-    $: height = (endTime - startTime);
+    $: height = (finalEndTime - finalStartTime);
     $: console.log(dragging);
     $: console.log(height);
+    $: finalEndTime = endTime - (endTime % 15)
+    $: finalStartTime = startTime - (startTime % 15);
 
     // $: startTime, startTime = Math.max(startTime, 0);
     // $: endTime, endTime = Math.min(endTime, 1440);
 
     let editing: boolean = false;
+    let showing: boolean = false;
 </script>
 
-<main style="height:{height}px !important;top:{startTime}px;" bind:this={self} on:mousedown={e => onDragStart(Dragging.SELF)}>
+<main on:contextmenu|preventDefault={event => {
+    showing = true;
+    mouse = [event.clientX, event.clientY];
+}} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown={e => onDragStart(Dragging.SELF)}>
     <div class="side-color"></div>
 
     <div class="handle-up" on:click={e => onDragStart(Dragging.TOP)}></div>
     <div class="handle-down" on:click={e => onDragStart(Dragging.BOTTOM)}></div>
 
-    {#if height > 61}
     <h1>Work on the Calendar app</h1>
     <p>
         {
-            Math.floor(startTime/60) <= 12 ? 
-                Math.floor(startTime/60) 
-                : Math.floor(startTime/60) - 12
-        }{Math.floor(((startTime/60)%1)*60) !== 0 ? `:${Math.floor(((startTime/60)%1)*60) < 10 ? '0' + Math.floor(((startTime/60)%1)*60) : Math.floor(((startTime/60)%1)*60)}` : ''}{
-            (Math.floor(endTime/60) < 12 ? 'AM' : 'PM') ===
-            (Math.floor(startTime/60) < 12 ? 'AM' : 'PM') ? '' : (Math.floor(startTime/60) < 12 ? 'AM' : 'PM')
+            Math.floor(finalStartTime/60) <= 12 ? 
+                Math.floor(finalStartTime/60) 
+                : Math.floor(finalStartTime/60) - 12
+        }{Math.floor(((finalStartTime/60)%1)*60) !== 0 ? `:${Math.floor(((finalStartTime/60)%1)*60) < 10 ? '0' + Math.floor(((finalStartTime/60)%1)*60) : Math.floor(((finalStartTime/60)%1)*60)}` : ''}{
+            (Math.floor(finalEndTime/60) < 12 ? 'AM' : 'PM') ===
+            (Math.floor(finalStartTime/60) < 12 ? 'AM' : 'PM') ? '' : (Math.floor(finalStartTime/60) < 12 ? 'AM' : 'PM')
         }—{
-            Math.floor(endTime/60) <= 12 ? 
-                Math.floor(endTime/60) 
-                : Math.floor(endTime/60) - 12
-        }{Math.floor(((endTime/60)%1)*60) !== 0 ? `:${Math.floor(((endTime/60)%1)*60) < 10 ? '0' + Math.floor(((endTime/60)%1)*60) : Math.floor(((endTime/60)%1)*60)}` : ''}{
-            Math.floor(endTime/60) < 12 ? 'AM' : 'PM'
+            Math.floor(finalEndTime/60) <= 12 ? 
+                Math.floor(finalEndTime/60) 
+                : Math.floor(finalEndTime/60) - 12
+        }{Math.floor(((finalEndTime/60)%1)*60) !== 0 ? `:${Math.floor(((finalEndTime/60)%1)*60) < 10 ? '0' + Math.floor(((finalEndTime/60)%1)*60) : Math.floor(((finalEndTime/60)%1)*60)}` : ''}{
+            Math.floor(finalEndTime/60) < 12 ? 'AM' : 'PM'
         }
-        <span>·</span>
-        <button on:click={() => editing = true}>Edit event</button>
     </p>
+
+    {#if showing}
+    <div style="width:200px;height:fit-content;position:fixed;left:{mouse[0]}px;top:{mouse[1]}px;">
+        <Main onClickOutside={() => showing = false}>
+            <p style="color:#a0a0a0;padding:4px 12px;">{
+                Math.floor(finalStartTime/60) <= 12 ? 
+                    Math.floor(finalStartTime/60) 
+                    : Math.floor(finalStartTime/60) - 12
+            }{Math.floor(((finalStartTime/60)%1)*60) !== 0 ? `:${Math.floor(((finalStartTime/60)%1)*60) < 10 ? '0' + Math.floor(((finalStartTime/60)%1)*60) : Math.floor(((finalStartTime/60)%1)*60)}` : ''}{
+                (Math.floor(finalEndTime/60) < 12 ? 'AM' : 'PM') ===
+                (Math.floor(finalStartTime/60) < 12 ? 'AM' : 'PM') ? '' : (Math.floor(finalStartTime/60) < 12 ? 'AM' : 'PM')
+            }—{
+                Math.floor(finalEndTime/60) <= 12 ? 
+                    Math.floor(finalEndTime/60) 
+                    : Math.floor(finalEndTime/60) - 12
+            }{Math.floor(((finalEndTime/60)%1)*60) !== 0 ? `:${Math.floor(((finalEndTime/60)%1)*60) < 10 ? '0' + Math.floor(((finalEndTime/60)%1)*60) : Math.floor(((finalEndTime/60)%1)*60)}` : ''}{
+                Math.floor(finalEndTime/60) < 12 ? 'AM' : 'PM'
+            } | {Math.floor((finalEndTime - finalStartTime) / 60)}h {Math.floor((finalEndTime - finalStartTime) % 60)}mins</p>
+            <Option onClick={() => {editing = true; showing = false;}}>Edit Event</Option>
+        </Main>
+    </div>
     {/if}
 </main>
 
@@ -122,6 +156,24 @@
         z-index: 2;
     }
 
+    main.sub-hour {
+        flex-direction: row;
+        padding: 6px 24px;
+    }
+
+    main.sub-hour > p,
+    main.sub-hour > h1 {
+        line-height: 80%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    main.sub-half-hour {
+        flex-direction: row;
+        padding: 0px 24px;
+    }
+
     div.side-color {
         width: 3px;
         height: 100%;
@@ -148,19 +200,11 @@
         bottom: 0px;
     }
 
-    main > p > span, main > p > button {
-        display: none;
-    }
-
-    main:hover > p > span, main:hover > p > button {
-        display: flex;
-    }
-
     h1, p {
         color: #FCEADD;
         user-select: none;
 
-        width: 100%;
+        width: fit-content;
         word-wrap: break-word;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -199,7 +243,7 @@
         outline: none;
         cursor: pointer;
 
-        height: fit-content;
+        height: 10px;
         width: fit-content;
         border-radius: 6px;
     }
