@@ -71,7 +71,7 @@
         touch-action: none;
         margin-bottom: -24px;
 
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: center;
         justify-content: center;
