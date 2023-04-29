@@ -52,6 +52,7 @@
         font-size: 14px;
         color: #ededed;
         font-family: var(--font-mono);
+        user-select: none;
     }
 
     div.toright {

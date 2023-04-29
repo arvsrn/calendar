@@ -55,12 +55,10 @@
                 <TimeBar></TimeBar>
                 {#each [...Array(30).keys()] as i}
                 <Column date="{days[new Date(`4/${i+1}/23`).getDay()]} {i + 1}">
-                    <!--
                     <EventComponent 
                         startTime={hoursToMinutes(14)} 
                         endTime={hoursToMinutes(15, 45)}
                     ></EventComponent>
-                    -->
                 </Column>
                 {/each}
             </Calendar>

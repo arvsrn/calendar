@@ -23,7 +23,7 @@
 
         position: sticky;
         left: 0;
-        z-index: 3;
+        z-index: 5;
     }
 
     main::-webkit-scrollbar {

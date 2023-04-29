@@ -18,7 +18,7 @@
         backdrop-filter: blur(1.1px);
         z-index: 200;
 
-        position: absolute;
+        position: fixed;
         top: 0px;
         left: 0px;
 

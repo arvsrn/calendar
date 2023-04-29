@@ -15,5 +15,19 @@
         flex-direction: column;
         gap: 8px;
         padding: 24px;
+
+        animation: 0.2s enter ease-in;
+    }
+
+    @keyframes enter {
+        from {
+            transform: translateY(5px);
+            opacity: 50%;
+        }
+
+        to {
+            transform: translateY(0px);
+            opacity: 100%;
+        }
     }
 </style>

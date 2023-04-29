@@ -8,8 +8,8 @@
 
     <div class="container" on:scroll|preventDefault={() => {}}>
         <slot></slot>
-        {#each [...Array(24).keys()] as _}
-        <div class="divider"></div>
+        {#each [...Array(24).keys()] as i}
+        <div class="divider" style:top="{60 * i}px"></div>
         {/each}
     </div>
 </main>
@@ -50,6 +50,7 @@
         width: calc(100% + 4px);
         background: rgba(255, 255, 255, 0.025);
         flex: none;
+        position: absolute;
     }
 
     p {
@@ -72,5 +73,6 @@
         z-index: 2;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.025);
+        z-index: 4;
     }
 </style>

@@ -135,7 +135,7 @@
         background: #232323;
         padding: 0px 10px;
         
-        border: 1px solid rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 0, 0, 0.4);
         border-radius: 6px;
 
         transition: box-shadow 0.15s cubic-bezier(.26,.68,.12,.98),
@@ -147,7 +147,8 @@
     }
 
     input[type="text"]:hover {
-        border: 1.5px solid rgba(0, 0, 0, 0.4);
+        border: 1.5px solid rgba(0, 0, 0, 0.5);
+        background: #242424;
     }
 
     input[type="text"].small {
