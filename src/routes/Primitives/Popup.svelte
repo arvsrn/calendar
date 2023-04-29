@@ -26,7 +26,9 @@
 </script>
 
 <main bind:this={self} class:transition={!sliding} style:transform="translateY({translateY}px)">
-    <div class="drawer-handle" on:touchstart={onHandleTouchStart}></div>
+    <div class="drawer-handle" on:touchstart={onHandleTouchStart}>
+        <div></div>
+    </div>
     <slot></slot>
 </main>
 
@@ -54,16 +56,25 @@
         transition: transform 0.1s ease-in;
     }
 
-    div.drawer-handle {
-        display: none;
-        margin: 0px auto;
-
+    div.drawer-handle > div {
         width: 100px;
         height: 4px;
         border-radius: 2px;
         background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-12px);
         touch-action: none;
+    }
+    
+    div.drawer-handle {
+        width: calc(100% + 48px);
+        height: 32px;
+        transform: translate(-24px, -24px);
+        touch-action: none;
+        margin-bottom: -24px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     @keyframes enter {
@@ -89,7 +100,7 @@
         }
 
         div.drawer-handle {
-            display: block;
+            display: flex;
         }
     }
 </style>
