@@ -1,6 +1,6 @@
 <script>
     import Button from "../Primitives/Button.svelte";
-    import Popup from "../Popup.svelte";
+    import Popup from "../Primitives/Popup.svelte";
     import TextInput from "../Primitives/TextInput.svelte";
 </script>
 

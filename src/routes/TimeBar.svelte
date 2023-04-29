@@ -36,7 +36,7 @@
 
         position: sticky;
         left: 0;
-        z-index: 4;
+        z-index: 7;
     }
 
     main::-webkit-scrollbar,
@@ -75,7 +75,7 @@
         overflow:visible;
     }
 
-    p.currentTime::after {
+    /* p.currentTime::after {
         content: "";
         width: 100vw;
         background: #a0a0a0;
@@ -85,5 +85,6 @@
         left: 100%;
         top: calc(50% - 1.5px);
         transform: translateX(1px);
-    }
+        z-index: -1;
+    } */
 </style>

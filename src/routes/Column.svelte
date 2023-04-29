@@ -17,7 +17,7 @@
 
 <style>
     main {
-        width: calc((100% - 30px) / var(--viewport-days));
+        width: calc((100% - 60px) / var(--viewport-days));
         height: 1468px;
 
         flex: none;

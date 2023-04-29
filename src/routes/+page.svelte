@@ -8,7 +8,7 @@
     import Sidebar from "./Sidebar.svelte";
     import Navbar from "./Navbar.svelte";
     import Blanket from "./Primitives/Blanket.svelte";
-    import Popup from "./Popup.svelte";
+    import Popup from "./Primitives/Popup.svelte";
     import Button from "./Primitives/Button.svelte";
     import TextInput from "./Primitives/TextInput.svelte";
     import EditTask from "./Popups/EditTask.svelte";

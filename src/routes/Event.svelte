@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import Button from "./Primitives/Button.svelte";
     import Blanket from "./Primitives/Blanket.svelte";
-    import Popup from "./Popup.svelte";
+    import Popup from "./Primitives/Popup.svelte";
     import TextInput from "./Primitives/TextInput.svelte";
     import Main from "./DropdownMenu/Main.svelte";
     import Option from "./DropdownMenu/Option.svelte";
