@@ -6,6 +6,7 @@
     import TextInput from "./Primitives/TextInput.svelte";
     import Main from "./DropdownMenu/Main.svelte";
     import Option from "./DropdownMenu/Option.svelte";
+    import Colors from "./Colors.svelte";
 
     const enum Dragging { TOP, BOTTOM, SELF, NONE };
 
@@ -57,8 +58,6 @@
     let self: HTMLElement;
 
     $: height = (finalEndTime - finalStartTime);
-    $: console.log(dragging);
-    $: console.log(height);
     $: finalEndTime = endTime - (endTime % 15)
     $: finalStartTime = startTime - (startTime % 15);
 
@@ -72,7 +71,7 @@
 <main on:contextmenu|preventDefault={event => {
     showing = true;
     mouse = [event.clientX, event.clientY];
-}} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown={e => onDragStart(Dragging.SELF)}>
+}} class:grabbing={dragging === Dragging.SELF} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown={e => onDragStart(Dragging.SELF)}>
     <div class="side-color"></div>
 
     <div class="handle-up" on:click={e => onDragStart(Dragging.TOP)}></div>
@@ -99,7 +98,7 @@
     {#if showing}
     <div style="width:200px;height:fit-content;position:fixed;left:{mouse[0]}px;top:{mouse[1]}px;">
         <Main onClickOutside={() => showing = false}>
-            <p style="color:#a0a0a0;padding:4px 12px;">{
+            <p style="color:#a0a0a0;padding:4px 12px;margin-bottom:8px;">{
                 Math.floor(finalStartTime/60) <= 12 ? 
                     Math.floor(finalStartTime/60) 
                     : Math.floor(finalStartTime/60) - 12
@@ -113,6 +112,10 @@
             }{Math.floor(((finalEndTime/60)%1)*60) !== 0 ? `:${Math.floor(((finalEndTime/60)%1)*60) < 10 ? '0' + Math.floor(((finalEndTime/60)%1)*60) : Math.floor(((finalEndTime/60)%1)*60)}` : ''}{
                 Math.floor(finalEndTime/60) < 12 ? 'AM' : 'PM'
             } | {Math.floor((finalEndTime - finalStartTime) / 60)}h {Math.floor((finalEndTime - finalStartTime) % 60)}mins</p>
+
+            <div style="margin-bottom:8px;">
+                <Colors></Colors>
+            </div>
             <Option onClick={() => {editing = true; showing = false;}}>Edit Event</Option>
         </Main>
     </div>
@@ -126,7 +129,6 @@
     <Popup onSlideOut={() => editing = false}>
         <h1 style="margin-bottom:8px;font-size:14px;color:#ededed;font-weight:bold;">Edit Event</h1>
         <TextInput placeholder="Event name"></TextInput>
-        <TextInput placeholder="Event description"></TextInput>
         <div style="margin-left:auto;display:flex;flex-direction:row;gap:4px;">
             <Button appearance="link" onClick={() => editing = false}>Cancel</Button>
             <Button appearance="secondary">Save</Button>
@@ -150,10 +152,14 @@
         background: #2D4935;
         border-radius: 6px;
 
-        cursor: pointer;
+        cursor: grab;
         position: relative;
         overflow: hidden;
         z-index: 2;
+    }
+
+    main.grabbing {
+        cursor: grabbing;
     }
 
     main.sub-hour {

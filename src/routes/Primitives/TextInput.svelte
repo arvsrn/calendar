@@ -138,17 +138,20 @@
         border: 1px solid rgba(0, 0, 0, 0.4);
         border-radius: 6px;
 
-        transition: box-shadow 0.15s cubic-bezier(.26,.68,.12,.98),
-            border 0.15s cubic-bezier(.26,.68,.12,.98);
+        transition: box-shadow 0.15s var(--ease),
+            border 0.15s var(--ease),
+            background var(--ease);
     }
 
     input[type="text"]::placeholder {
         color: #7E7E7E;
     }
 
-    input[type="text"]:hover {
+    input[type="text"]:hover,
+    input[type="text"]:active,
+    input[type="text"]:focus {
         border: 1.5px solid rgba(0, 0, 0, 0.5);
-        background: #242424;
+        background: #252525;
     }
 
     input[type="text"].small {

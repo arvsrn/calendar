@@ -40,6 +40,6 @@
 
         border-radius: 5px;
 
-        transition: width 0.15s ease-in-out;
+        transition: width 0.15s var(--ease);
     }
 </style>

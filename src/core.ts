@@ -18,6 +18,7 @@ interface App {
     viewportDays: number;
     todaysTasks: Array<Task>;
     events: Map<CalendarDate, CalendarEvent>;
+    showingSidebar: boolean;
 }
 
 export const app = writable<App>({
@@ -27,7 +28,8 @@ export const app = writable<App>({
         { title: '<b>This task</b> is <i>very wierd</i> and <u>wonky</u>.', completed: false },
         { title: 'This is a not so short task. Still normal, just longer', completed: true },
     ],
-    events: new Map()
+    events: new Map(),
+    showingSidebar: false,
 });
 
 export const getCompletedTasks = (tasks: Array<Task>): Array<Task> => tasks.filter(n => n.completed);

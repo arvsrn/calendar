@@ -49,11 +49,11 @@
         gap: 8px;
         padding: 24px;
 
-        animation: 0.15s enter ease-in;
+        animation: 0.15s enter var(--ease);
     }
 
     .transition {
-        transition: transform 0.1s ease-in;
+        transition: transform 0.1s var(--ease);
     }
 
     div.drawer-handle > div {

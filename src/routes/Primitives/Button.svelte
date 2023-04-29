@@ -35,8 +35,8 @@
         border: none;
         border: 1px solid rgba(0, 0, 0, 1.0);
 
-        transition: background 0.15s cubic-bezier(.26,.68,.12,.98),
-            transform 0.15s cubic-bezier(.26,.68,.12,.98);
+        transition: background 0.15s var(--ease),
+            transform 0.15s var(--ease);
     }
 
     button:active {

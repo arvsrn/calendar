@@ -13,42 +13,20 @@
     import TextInput from "./Primitives/TextInput.svelte";
     import EditTask from "./Popups/EditTask.svelte";
     import DeleteTask from "./Popups/DeleteTask.svelte";
+    import { app } from "../core";
 
     const hoursToMinutes = (hours: number, minutes: number = 0) => hours * 60 + minutes;
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let width: string = "";
 
-    /*
-    onMount(() => {
-        let s1 = document.getElementById('viewport');
-        let s2 = document.getElementById('ribbon');
-        let s3 = document.getElementById('timebar');
-
-        if (s1 != null && s2 != null) {
-            // @ts-ignore
-            const select_scroll_1 = (e: Event) => s2.scrollLeft = s1.scrollLeft;
-            // @ts-ignore
-            const select_scroll_2 = (e: Event) => s1.scrollLeft = s2.scrollLeft;
-
-            s1.addEventListener('scroll', select_scroll_1, false);
-            s2.addEventListener('scroll', select_scroll_2, false);
-        }
-
-        if (s1 != null && s3 != null) {
-            // @ts-ignore
-            const select_scroll_1 = (e: Event) => s3.scrollTop = s1.scrollTop;
-            // @ts-ignore
-            const select_scroll_2 = (e: Event) => s1.scrollTop = s3.scrollTop;
-
-            s1.addEventListener('scroll', select_scroll_1, false);
-            s3.addEventListener('scroll', select_scroll_2, false);
-        }
+    app.subscribe(value => {
+        width = value.showingSidebar ? `calc(100% - 271px)` : '100%';
     });
-    */
 </script>
 
 <main>
     <Sidebar></Sidebar>
-    <div class="viewport">
+    <div class="viewport" style:width={width}>
         <Navbar></Navbar>
         <div class="viewport-inner">
             <Calendar>
@@ -78,7 +56,6 @@
     }
 
     .viewport {
-        width: calc(100% - 271px);
         height: calc(100vh - 50px);
 
         display: flex;
