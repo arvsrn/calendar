@@ -1,9 +1,10 @@
 <script lang="ts">
     export let label: string = "";
     export let onClick: () => void = () => {};
+    export let appearance: 'danger' | 'normal' = 'normal';
 </script>
 
-<main on:click={onClick}>
+<main on:click={onClick} class={appearance}>
     <slot></slot>
 
     {#if label}
@@ -28,11 +29,18 @@
 
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-size: 12.5px;
+    }
+
+    main.normal {
         color: #ededed;
     }
 
     main:hover {
         background: rgba(255, 255, 255, 0.05);
+    }
+
+    main.danger {
+        color: rgb(249, 84, 72);
     }
 
     main > p {

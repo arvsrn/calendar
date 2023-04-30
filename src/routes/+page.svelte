@@ -36,6 +36,8 @@
                     <EventComponent 
                         startTime={hoursToMinutes(14)} 
                         endTime={hoursToMinutes(15, 45)}
+                        name="Work on Calendar"
+                        description=""
                     ></EventComponent>
                 </Column>
                 {/each}
@@ -60,6 +62,8 @@
 
         display: flex;
         flex-direction: column;
+        flex: 1;
+        width: 100%;
     }
 
     .viewport > .viewport-inner {

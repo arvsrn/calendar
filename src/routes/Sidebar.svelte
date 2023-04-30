@@ -39,7 +39,7 @@
         --> 
 
         {#each $app.todaysTasks as task}
-            <TodoTask bind:done={task.completed}>{@html task.title}</TodoTask>
+            <TodoTask origin="indirect" bind:done={task.completed}>{@html task.title}</TodoTask>
         {/each}
 
         <TodoTaskProgress bind:percentage={percentage}></TodoTaskProgress>
@@ -63,7 +63,7 @@
             --> 
     
             {#each $app.todaysTasks as task}
-                <TodoTask bind:done={task.completed}>{@html task.title}</TodoTask>
+                <TodoTask origin="indirect" bind:done={task.completed}>{@html task.title}</TodoTask>
             {/each}
     
             <TodoTaskProgress bind:percentage={percentage}></TodoTaskProgress>
@@ -91,7 +91,7 @@
         height: 100vh;
         
         background: #1c1c1c;
-        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        border-right: 1px solid rgba(255, 255, 255, 0.075);
 
         flex: none;
 

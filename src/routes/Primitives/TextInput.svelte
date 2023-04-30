@@ -135,7 +135,7 @@
         background: #232323;
         padding: 0px 10px;
         
-        border: 1px solid rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.025);
         border-radius: 6px;
 
         transition: box-shadow 0.15s var(--ease),
@@ -150,7 +150,7 @@
     input[type="text"]:hover,
     input[type="text"]:active,
     input[type="text"]:focus {
-        border: 1.5px solid rgba(0, 0, 0, 0.5);
+        border: 1.5px solid rgba(255, 255, 255, 0.05);
         background: #252525;
     }
 

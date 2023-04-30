@@ -3,6 +3,10 @@
     --font-mono: 'Courier New', Courier, monospace;
 
     --viewport-days: 5;
+    --ease: cubic-bezier(.26,.68,.12,.98);
+    --showing-sidebar: none; /* display value for the sidebar 
+    --showing-sidebar: flex;
+    */
 }
 
 * {

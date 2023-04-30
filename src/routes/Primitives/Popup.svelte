@@ -40,7 +40,7 @@
         height: fit-content;
 
         background: #1c1c1c;
-        border: 1px solid rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.025);
         border-radius: 12px;
         box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
 

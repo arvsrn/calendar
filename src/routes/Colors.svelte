@@ -5,7 +5,7 @@
 
     export let choices: Array<string> = ["#E93F33", "#ED773D", "#F4BE40", "#66CC8A", "#4CA8DF", "#985DF6", "#B8B8B8"];
     export let current: string = choices[0];
-    let currentIndex: number = 0;
+    export let currentIndex: number = 0;
 
     $: current = choices[currentIndex];
 </script>

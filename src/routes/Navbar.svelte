@@ -10,7 +10,9 @@
 
 <main>
     <button style:margin-right="8px" on:click={() => $app.showingSidebar = !$app.showingSidebar}>
-        <svg style:scale="0.85" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2H13.5C13.7761 2 14 2.22386 14 2.5V12.5C14 12.7761 13.7761 13 13.5 13H8V2ZM7 2H1.5C1.22386 2 1 2.22386 1 2.5V12.5C1 12.7761 1.22386 13 1.5 13H7V2ZM0 2.5C0 1.67157 0.671573 1 1.5 1H13.5C14.3284 1 15 1.67157 15 2.5V12.5C15 13.3284 14.3284 14 13.5 14H1.5C0.671573 14 0 13.3284 0 12.5V2.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.5 0.5H2.5C1.39543 0.5 0.5 1.39543 0.5 2.5V9.5C0.5 10.6046 1.39543 11.5 2.5 11.5H5.5M5.5 0.5H11.5C12.6046 0.5 13.5 1.39543 13.5 2.5V9.5C13.5 10.6046 12.6046 11.5 11.5 11.5H5.5M5.5 0.5V11.5M2 2.5H4M2 4.5H4M2 6.5H4" stroke="currentColor"/>
+        </svg>            
     </button>
     <h1>April <span>2023</span></h1>
 

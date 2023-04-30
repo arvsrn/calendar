@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
+    import { fade, slide } from "svelte/transition";
 
     export function clickOutside(node: HTMLElement, handler: () => void): { destroy: () => void } {
         const onClick = (event: MouseEvent) => node &&
@@ -18,7 +18,7 @@
     export let onClickOutside: () => void = () => {};
 </script>
 
-<main out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
+<main in:slide={{ duration: 80 }} out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
     <slot></slot>
 </main>
 
@@ -28,7 +28,7 @@
         outline: none;
         background: #232323;
         
-        border: 1px solid rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.025);
         box-shadow: 0px 13px 5px rgba(0, 0, 0, 0.01), 
             0px 7px 4px rgba(0, 0, 0, 0.05), 
             0px 3px 3px rgba(0, 0, 0, 0.09), 
@@ -43,8 +43,9 @@
         display: flex;
         flex-direction: column;
 
-        animation: enter 0.05s var(--ease) 1;
+        /* animation: enter 0.05s var(--ease) 1; */
         z-index: 101;
+        cursor: default;
     }
 
     @keyframes enter {
