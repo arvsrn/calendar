@@ -95,14 +95,14 @@
         if (!self.parentElement) return;
 
         if (showing) {
-            self.parentElement.style.zIndex = "1000";
-            for (const element of self.parentElement.children) {
+            self.parentElement.style.zIndex = "2";
+            for (const element of self.parentElement.getElementsByClassName('event')) {
                 if (element !== self)
                     (element as HTMLElement).style.zIndex = "-1";
             }
         } else {
             self.parentElement.style.zIndex = "1";
-            for (const element of self.parentElement.children) {
+            for (const element of self.parentElement.getElementsByClassName('event')) {
                 if (element !== self)
                     (element as HTMLElement).style.zIndex = "0";
             }

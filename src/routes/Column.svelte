@@ -129,6 +129,7 @@
         background: rgba(255, 255, 255, 0.025);
         flex: none;
         position: absolute;
+        z-index: -2;
     }
 
     p {
