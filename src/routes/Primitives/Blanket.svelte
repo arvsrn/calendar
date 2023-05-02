@@ -16,7 +16,7 @@
 
         background: rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(1.1px);
-        z-index: 100;
+        z-index: 1200;
 
         position: fixed;
         top: 0px;

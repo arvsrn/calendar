@@ -43,6 +43,7 @@
         dragging = true;
         dragStartPosition = ev.clientY + (self.parentElement?.scrollTop || 0) - 78; // 78 is height of navbar
         dragEndPosition = dragStartPosition;
+        console.log('fard', dragStartPosition);
     }}>
         {#each events as event}
             <EventComponent 
@@ -129,7 +130,6 @@
         background: rgba(255, 255, 255, 0.025);
         flex: none;
         position: absolute;
-        z-index: -2;
     }
 
     p {

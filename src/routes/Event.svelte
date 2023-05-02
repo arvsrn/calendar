@@ -69,9 +69,6 @@
     let dragging: Dragging = Dragging.NONE;
     let height: number = (endTime - startTime);
     let self: HTMLElement;
-    let mounted: boolean = false;
-
-    onMount(() => mounted = true);
 
     export let name: string = "";
     export let description: string = "";
@@ -90,31 +87,32 @@
     let editing: boolean = false;
     let showing: boolean = false;
 
-    $: showing, (() => {
+    /* $: showing, (() => {
         if (!mounted) return;
         if (!self.parentElement) return;
 
         if (showing) {
             self.parentElement.style.zIndex = "2";
+            self.style.zIndex = "2";
             for (const element of self.parentElement.getElementsByClassName('event')) {
                 if (element !== self)
-                    (element as HTMLElement).style.zIndex = "-1";
+                    (element as HTMLElement).style.zIndex = "1";
             }
         } else {
             self.parentElement.style.zIndex = "1";
+            self.style.zIndex = "1";
             for (const element of self.parentElement.getElementsByClassName('event')) {
                 if (element !== self)
                     (element as HTMLElement).style.zIndex = "0";
             }
         }
-    })();
+    })(); */
 </script>
 
 <main on:contextmenu|preventDefault={event => {
     showing = true;
     mouse = [event.clientX, event.clientY];
-    document.dispatchEvent(new CustomEvent('_custom-event-contextmenu', { detail: mouse }))
-}} class="event {color}" class:hour={height === 60} class:grabbing={dragging === Dragging.SELF} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown|self={e => onDragStart(Dragging.SELF)}>
+}} class={color} class:hour={height === 60} class:grabbing={dragging === Dragging.SELF} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown|self={e => onDragStart(Dragging.SELF)}>
     <div on:mousedown|self={e => onDragStart(Dragging.SELF)} class="side-color"></div>
 
     <div class="handle-up" on:mousedown={e => onDragStart(Dragging.TOP)}></div>
