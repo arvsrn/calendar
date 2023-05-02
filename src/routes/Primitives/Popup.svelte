@@ -15,7 +15,7 @@
         translateY = event.targetTouches[0].clientY - self.offsetTop;
         translateY = Math.max(0, translateY);
 
-        if (translateY > 300)
+        if (translateY > 150)
             onSlideOut();
     };
 
@@ -95,7 +95,7 @@
         main {
             width: 100%;
             border-radius: 12px 12px 0px 0px;
-            height: 50vh;
+            height: 70vh;
             margin-top: auto;
         }
 

@@ -281,9 +281,9 @@
         color: white;
         user-select: none;
 
-        width: fit-content;
+        width: 100%;
         word-wrap: break-word;
-        overflow: visible;
+        overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
@@ -299,6 +299,7 @@
         display: flex;
         flex-direction: row;
         gap: 4px;
+        width: 100%;
     }
 
     main.red {

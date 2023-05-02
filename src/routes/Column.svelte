@@ -37,7 +37,8 @@
 </script>
 
 <main bind:this={self} class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])}>
-    <p>{date}</p>
+    <!-- TODO: make active class for current day -->
+    <p class="active">{date}</p>
 
     <div class="container" on:scroll|preventDefault={() => {}} on:mousedown|self={ev => {
         dragging = true;
@@ -66,9 +67,8 @@
 </main>
 
 <svelte:window on:mousemove={ev => {
-    if (dragging) {
+    if (dragging)
         dragEndPosition += ev.movementY;
-    }
 }} on:mouseup={() => {
     if (dragging) {
         events = [...events, {
