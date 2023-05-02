@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    import Calendar from "./Viewport.svelte";
+    import Viewport from "./Viewport.svelte";
     import Column from "./Column.svelte";
     import EventComponent from "./Event.svelte";
     import TimeBar from "./TimeBar.svelte";
@@ -15,7 +15,6 @@
     import DeleteTask from "./Popups/DeleteTask.svelte";
     import { app } from "../core";
 
-    const hoursToMinutes = (hours: number, minutes: number = 0) => hours * 60 + minutes;
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let width: string = "";
 
@@ -29,19 +28,12 @@
     <div class="viewport" style:width={width}>
         <Navbar></Navbar>
         <div class="viewport-inner">
-            <Calendar>
+            <Viewport>
                 <TimeBar></TimeBar>
                 {#each [...Array(30).keys()] as i}
-                <Column date="{days[new Date(`4/${i+1}/23`).getDay()]} {i + 1}">
-                    <EventComponent 
-                        startTime={hoursToMinutes(14)} 
-                        endTime={hoursToMinutes(15, 45)}
-                        name="Work on Calendar"
-                        description=""
-                    ></EventComponent>
-                </Column>
+                <Column date="{days[new Date(`4/${i+1}/23`).getDay()]} {i + 1}"/>
                 {/each}
-            </Calendar>
+            </Viewport>
         </div>
     </div>
 </main>

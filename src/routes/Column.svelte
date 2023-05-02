@@ -1,19 +1,79 @@
 <script lang="ts">
+    import EventComponent from "./Event.svelte";
+
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const hoursToMinutes = (hours: number, minutes: number = 0) => hours * 60 + minutes;
+
+    interface Event {
+        startTime: number;
+        endTime: number;
+        name: string;
+        description: string;
+        color: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
+    }
 
     export let date: string = "";
+    export let events: Array<Event> = [
+        {
+            startTime: hoursToMinutes(2),
+            endTime: hoursToMinutes(4, 30),
+            name: 'Work on Calendar',
+            description: "",
+            color: "green",
+        },
+        {
+            startTime: hoursToMinutes(4, 45),
+            endTime: hoursToMinutes(6),
+            name: 'Study Physics',
+            description: "",
+            color: "blue",
+        }
+    ];
+
+    let self: HTMLElement;
+    let dragging: boolean = false;
+    let dragStartPosition: number = 0;
+    let dragEndPosition: number = 0;
 </script>
 
-<main class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])}>
+<main bind:this={self} class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])}>
     <p>{date}</p>
 
-    <div class="container" on:scroll|preventDefault={() => {}}>
-        <slot></slot>
+    <div class="container" on:scroll|preventDefault={() => {}} on:mousedown|self={ev => {
+        dragging = true;
+        dragStartPosition = ev.clientX + (self.parentElement?.scrollTop || 0);
+        console.log('fard');
+    }}>
+        {#each events as event}
+            <EventComponent 
+                startTime={event.startTime} 
+                endTime={event.endTime}
+                name={event.name}
+                description={event.description}
+                color={event.color}
+            ></EventComponent>
+        {/each}
+        
         {#each [...Array(24).keys()] as i}
         <div class="divider" style:top="{60 * i}px"></div>
         {/each}
     </div>
 </main>
+
+<svelte:window on:mousemove={ev => {
+    dragEndPosition = ev.clientX + (self.parentElement?.scrollTop || 0);
+}} on:mouseup={() => {
+    if (dragging) {
+        events = [...events, {
+            name: 'New Event',
+            description: '',
+            color: 'gray',
+            startTime: dragStartPosition,
+            endTime: dragEndPosition,
+        }];
+        dragging = false;
+    }
+}}/>
 
 <style>
     main {

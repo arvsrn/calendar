@@ -20,7 +20,7 @@
         </button>
     </div>
 
-    <p class:enabled={done} contenteditable={editable} on:keydown={event => {
+    <p class:enabled={done} contenteditable={editable && !done} on:keydown={event => {
         if (event.key == 'Enter') event.preventDefault();
     }}><slot></slot></p>
 

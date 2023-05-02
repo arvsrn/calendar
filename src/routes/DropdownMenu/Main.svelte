@@ -18,7 +18,7 @@
     export let onClickOutside: () => void = () => {};
 </script>
 
-<main in:slide={{ duration: 80 }} out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
+<main out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
     <slot></slot>
 </main>
 
@@ -43,7 +43,7 @@
         display: flex;
         flex-direction: column;
 
-        /* animation: enter 0.05s var(--ease) 1; */
+        animation: enter 0.05s var(--ease) 1;
         z-index: 101;
         cursor: default;
     }

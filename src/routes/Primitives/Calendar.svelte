@@ -1,136 +1,100 @@
-<script lang="ts">
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    const monthDays: number[] = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const percentages: number[] = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    let currentMonth: number = new Date().getMonth();
-    let monthsOfTheYear: Array<Array<boolean>> = [];
-
-    for (const days of monthDays) {
-        monthsOfTheYear.push([]);
-
-        for (let i = 0; i < days; i++) 
-            monthsOfTheYear[monthsOfTheYear.length - 1].push(false);
-    }
-    
-    let offset = 2;
-
-    const updatePercentage = () => {
-        const total = monthsOfTheYear[currentMonth].length;
-        const daysOff = monthsOfTheYear[currentMonth].filter(n => n).length;
-
-        percentages[currentMonth] = Math.round(100.0 - ((daysOff/total) * 100));
-    };
-
-    const onCurrentMonthUpdate = () => {
-        if (currentMonth < 0) currentMonth = 0;
-        else if (currentMonth > 11) currentMonth = 11;
-
-        const date = new Date();
-        offset = new Date(date.getFullYear(), currentMonth, 1).getDay() - 1;
-    };
-
-    $: currentMonth, onCurrentMonthUpdate()
-    $: monthsOfTheYear[currentMonth], updatePercentage()
-</script>
-
 <main>
     <div class="row">
-        <div class="label darker">Mon</div>
-        <div class="label darker">Tue</div>
-        <div class="label darker">Wed</div>
-        <div class="label darker">Thu</div>
-        <div class="label darker">Fri</div>
-        <div class="label darker">Sat</div>
-        <div class="label darker">Sun</div>
+        <div class="label dark">Su</div>
+        <div class="label dark">Mo</div>
+        <div class="label dark">Tu</div>
+        <div class="label dark">We</div>
+        <div class="label dark">Th</div>
+        <div class="label dark">Fr</div>
+        <div class="label dark">Sa</div>
     </div>
-    <div class="main">
-        {#if offset > 0}
-            {#each [...Array(offset).keys()] as i}
-                <div class="label"></div>
-            {/each}
-        {/if}
-        {#each monthsOfTheYear[currentMonth] as day, i}
-            <button on:click={() => monthsOfTheYear[currentMonth][i] = !monthsOfTheYear[currentMonth][i]} class:enabled={monthsOfTheYear[currentMonth][i]}>{i + 1}</button>
-        {/each}
+    <div class="row">
+        <div class="label dark">30</div>
+        <div class="label active">1</div>
+        <div class="label">2</div>
+        <div class="label">3</div>
+        <div class="label">4</div>
+        <div class="label">5</div>
+        <div class="label">6</div>
+    </div>
+    <div class="row">
+        <div class="label">7</div>
+        <div class="label">8</div>
+        <div class="label">9</div>
+        <div class="label">10</div>
+        <div class="label">11</div>
+        <div class="label">12</div>
+        <div class="label">13</div>
+    </div>
+    <div class="row">
+        <div class="label">14</div>
+        <div class="label">15</div>
+        <div class="label">16</div>
+        <div class="label">17</div>
+        <div class="label">18</div>
+        <div class="label">19</div>
+        <div class="label">20</div>
+    </div>
+    <div class="row">
+        <div class="label">21</div>
+        <div class="label">22</div>
+        <div class="label">23</div>
+        <div class="label">24</div>
+        <div class="label">25</div>
+        <div class="label">26</div>
+        <div class="label">27</div>
+    </div>
+    <div class="row">
+        <div class="label">28</div>
+        <div class="label">29</div>
+        <div class="label">30</div>
+        <div class="label">31</div>
+        <div class="label dark">1</div>
+        <div class="label dark">2</div>
+        <div class="label dark">3</div>
     </div>
 </main>
 
 <style>
     main {
-        width: 100%;
-        height: fit-content;
-
         display: flex;
         flex-direction: column;
-        gap: 8px;
-
-        position: relative;
+        gap: 3px;
     }
 
     div.row {
         display: flex;
         flex-direction: row;
-        width: 248px;
         gap: 2px;
     }
 
     div.label {
-        aspect-ratio: 1/1;
+        width: 30px;
+        height: 30px;
 
-        color: #ededed;
-        font-weight: 400;
         font-size: 12px;
         font-family: var(--font-mono);
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
+        color: white;
 
         user-select: none;
-    }
-
-    div.darker {
-        color: #707070 !important;
-    }
-
-    div.main {
-        width: 248px;
-        height: fit-content;
-
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
-        gap: 4px;
-    }
-
-    button {
-        height: 32px;
-        width: 32px;
-
-        color: #ededed;
-        font-weight: 600;
-        font-size: 13px;
-
-        display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex: none;
 
-        background: transparent;
-        border: none;
-        outline: none;
-        border-radius: 4px;
         cursor: pointer;
-
-        user-select: none;
+        border-radius: 4px;
     }
 
-    button.enabled {
-        background: rgba(255, 125, 19, 0.25);
+    div.label.dark {
+        color: #7e7e7e;
+    }
+
+    div.label:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    div.label.active {
+        background: rgba(255, 255, 255, 0.05);
     }
 </style>
