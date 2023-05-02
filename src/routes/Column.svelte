@@ -41,8 +41,8 @@
 
     <div class="container" on:scroll|preventDefault={() => {}} on:mousedown|self={ev => {
         dragging = true;
-        dragStartPosition = ev.clientX + (self.parentElement?.scrollTop || 0);
-        console.log('fard');
+        dragStartPosition = ev.clientY + (self.parentElement?.scrollTop || 0) - 78; // 78 is height of navbar
+        dragEndPosition = dragStartPosition;
     }}>
         {#each events as event}
             <EventComponent 
@@ -53,6 +53,10 @@
                 color={event.color}
             ></EventComponent>
         {/each}
+
+        {#if dragging}
+        <div class="new" style:top="{dragStartPosition}px" style:height="{(dragEndPosition - dragStartPosition) - ((dragEndPosition - dragStartPosition) % 15)}px"></div>
+        {/if}
         
         {#each [...Array(24).keys()] as i}
         <div class="divider" style:top="{60 * i}px"></div>
@@ -61,7 +65,9 @@
 </main>
 
 <svelte:window on:mousemove={ev => {
-    dragEndPosition = ev.clientX + (self.parentElement?.scrollTop || 0);
+    if (dragging) {
+        dragEndPosition += ev.movementY;
+    }
 }} on:mouseup={() => {
     if (dragging) {
         events = [...events, {
@@ -72,6 +78,8 @@
             endTime: dragEndPosition,
         }];
         dragging = false;
+        dragStartPosition = 0;
+        dragEndPosition = 0;
     }
 }}/>
 
@@ -105,6 +113,14 @@
         
         overflow: hidden;
         border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    div.new {
+        width: 100%;
+        position: absolute;
+        background: rgba(184, 184, 184, 0.1);
+        margin-top: -2px;
+        margin-left: -2px;
     }
 
     div.divider {

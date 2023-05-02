@@ -36,6 +36,9 @@
                     else endTime = 0;
 
                     break;
+                } else {
+                    dragging = Dragging.TOP;
+                    onDragging(event);
                 }
             
             case Dragging.TOP:
@@ -45,6 +48,9 @@
                     else startTime = 0;
 
                     break;
+                } else {
+                    dragging = Dragging.BOTTOM;
+                    onDragging(event);
                 }
             
             case Dragging.SELF:
@@ -63,6 +69,9 @@
     let dragging: Dragging = Dragging.NONE;
     let height: number = (endTime - startTime);
     let self: HTMLElement;
+    let mounted: boolean = false;
+
+    onMount(() => mounted = true);
 
     export let name: string = "";
     export let description: string = "";
@@ -80,12 +89,32 @@
 
     let editing: boolean = false;
     let showing: boolean = false;
+
+    $: showing, (() => {
+        if (!mounted) return;
+        if (!self.parentElement) return;
+
+        if (showing) {
+            self.parentElement.style.zIndex = "1000";
+            for (const element of self.parentElement.children) {
+                if (element !== self)
+                    (element as HTMLElement).style.zIndex = "-1";
+            }
+        } else {
+            self.parentElement.style.zIndex = "1";
+            for (const element of self.parentElement.children) {
+                if (element !== self)
+                    (element as HTMLElement).style.zIndex = "0";
+            }
+        }
+    })();
 </script>
 
 <main on:contextmenu|preventDefault={event => {
     showing = true;
     mouse = [event.clientX, event.clientY];
-}} class={color} class:grabbing={dragging === Dragging.SELF} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown|self={e => onDragStart(Dragging.SELF)}>
+    document.dispatchEvent(new CustomEvent('_custom-event-contextmenu', { detail: mouse }))
+}} class="event {color}" class:hour={height === 60} class:grabbing={dragging === Dragging.SELF} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown|self={e => onDragStart(Dragging.SELF)}>
     <div on:mousedown|self={e => onDragStart(Dragging.SELF)} class="side-color"></div>
 
     <div class="handle-up" on:mousedown={e => onDragStart(Dragging.TOP)}></div>
@@ -113,7 +142,7 @@
     {#if showing}
     <div style="width:144px;height:fit-content;position:fixed;left:{mouse[0]}px;top:{mouse[1]}px;">
         <Main onClickOutside={() => showing = false}>
-            <p style="color:#a0a0a0;padding:4px 12px;margin-bottom:8px;">{
+            <p style="color:#a0a0a0;padding:4px 12px;">{
                 Math.floor(finalStartTime/60) <= 12 ? 
                     Math.floor(finalStartTime/60) 
                     : Math.floor(finalStartTime/60) - 12
@@ -126,7 +155,10 @@
                     : Math.floor(finalEndTime/60) - 12
             }{Math.floor(((finalEndTime/60)%1)*60) !== 0 ? `:${Math.floor(((finalEndTime/60)%1)*60) < 10 ? '0' + Math.floor(((finalEndTime/60)%1)*60) : Math.floor(((finalEndTime/60)%1)*60)}` : ''}{
                 Math.floor(finalEndTime/60) < 12 ? 'AM' : 'PM'
-            } | {Math.floor((finalEndTime - finalStartTime) / 60)}h {Math.floor((finalEndTime - finalStartTime) % 60)}mins</p>
+            }</p>
+            <p style="color:#a0a0a0;padding:0px 12px;">{Math.floor((finalEndTime - finalStartTime) / 60)}h {Math.floor((finalEndTime - finalStartTime) % 60)}mins</p>
+
+            <div style="height:1px;width:100%;background:rgba(255, 255, 255, 0.035);margin:12px 0px;"></div>
 
             <div style="margin-bottom:8px;">
                 <Colors bind:currentIndex={colorIndex}></Colors>
@@ -191,6 +223,8 @@
         cursor: grab;
         overflow: hidden;
         z-index: 2;
+
+        transition: background 0.15s var(--ease);
     }
 
     main.grabbing {
@@ -199,7 +233,7 @@
 
     main.sub-hour {
         flex-direction: row;
-        padding: 6px 24px;
+        padding: 6px 16px;
     }
 
     main.sub-hour > p,
@@ -212,7 +246,11 @@
 
     main.sub-half-hour {
         flex-direction: row;
-        padding: 0px 24px;
+        padding: 0px 16px;
+    }
+
+    main.hour {
+        gap: 0px;
     }
 
     div.side-color {
@@ -247,15 +285,13 @@
 
         width: fit-content;
         word-wrap: break-word;
-        overflow: hidden;
+        overflow: visible;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     h1 {
         font-weight: 600;
-        min-height: fit-content;
-        max-height: 100%;
     }
 
     p {
