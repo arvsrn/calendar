@@ -5,11 +5,13 @@ interface Task {
     completed: boolean;
 }
 
-interface CalendarEvent {
-    name: string;
-    description: string;
+export interface CalendarEvent {
     startTime: number;
     endTime: number;
+    name: string;
+    description: string;
+    color: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
+    tasks: Array<Task>;
 }
 
 type CalendarDate = [number, number, number]; // DD/MM/YY

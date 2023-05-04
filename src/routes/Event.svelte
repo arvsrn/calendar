@@ -10,14 +10,15 @@
     import MultilineTextInput from "./Primitives/MultilineTextInput.svelte";
     import TodoTask from "./TodoTask.svelte";
     import TodoTaskNew from "./TodoTaskNew.svelte";
+    import type { CalendarEvent } from "../core";
 
     type COLORS = 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
-    const COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'gray'];
+    const COLORS: Array<COLORS> = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'gray'];
     const enum Dragging { TOP, BOTTOM, SELF, NONE };
 
     export let startTime: number;
     export let endTime: number;
-    export let color: string = COLORS[0];
+    export let color: COLORS = COLORS[1];
     
     let colorIndex: number = COLORS.indexOf(color);
     let finalEndTime: number = endTime - (endTime % 15)
@@ -112,7 +113,7 @@
 <main on:contextmenu|preventDefault={event => {
     showing = true;
     mouse = [event.clientX, event.clientY];
-}} class={color} class:hour={height === 60} class:grabbing={dragging === Dragging.SELF} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown|self={e => onDragStart(Dragging.SELF)}>
+}} class={color} class:hour={height === 60} class:grabbing={dragging === Dragging.SELF} class:sub-hour={height < 60} class:sub-half-hour={height < 45} style="height:{height - 2}px !important;top:{finalStartTime}px;" bind:this={self} on:mousedown|self={e => onDragStart(Dragging.SELF)}>
     <div on:mousedown|self={e => onDragStart(Dragging.SELF)} class="side-color"></div>
 
     <div class="handle-up" on:mousedown={e => onDragStart(Dragging.TOP)}></div>
@@ -212,7 +213,7 @@
 
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 2px;
         padding: 16px;
 
         background: #2D4935;
@@ -281,7 +282,8 @@
         color: white;
         user-select: none;
 
-        width: 100%;
+        width: fit-content;
+        max-width: 100%;
         word-wrap: break-word;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -299,7 +301,6 @@
         display: flex;
         flex-direction: row;
         gap: 4px;
-        width: 100%;
     }
 
     main.red {

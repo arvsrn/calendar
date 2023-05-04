@@ -1,25 +1,19 @@
 <script lang="ts">
-    import EventComponent from "./Event.svelte";
+    import type { CalendarEvent } from "../core";
+    import Event from "./Event.svelte";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const hoursToMinutes = (hours: number, minutes: number = 0) => hours * 60 + minutes;
 
-    interface Event {
-        startTime: number;
-        endTime: number;
-        name: string;
-        description: string;
-        color: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
-    }
-
     export let date: string = "";
-    export let events: Array<Event> = [
+    export let events: Array<CalendarEvent> = [
         {
             startTime: hoursToMinutes(2),
             endTime: hoursToMinutes(4, 30),
             name: 'Work on Calendar',
             description: "",
             color: "green",
+            tasks: [],
         },
         {
             startTime: hoursToMinutes(4, 45),
@@ -27,6 +21,7 @@
             name: 'Study Physics',
             description: "",
             color: "blue",
+            tasks: [],
         }
     ];
 
@@ -44,16 +39,15 @@
         dragging = true;
         dragStartPosition = ev.clientY + (self.parentElement?.scrollTop || 0) - 78; // 78 is height of navbar
         dragEndPosition = dragStartPosition;
-        console.log('fard', dragStartPosition);
     }}>
-        {#each events as event}
-            <EventComponent 
+        {#each events as event, i}
+            <Event
                 startTime={event.startTime} 
                 endTime={event.endTime}
                 name={event.name}
                 description={event.description}
                 color={event.color}
-            ></EventComponent>
+            ></Event>
         {/each}
 
         {#if dragging}
@@ -67,17 +61,19 @@
 </main>
 
 <svelte:window on:mousemove={ev => {
-    if (dragging)
+    if (dragging) 
         dragEndPosition += ev.movementY;
 }} on:mouseup={() => {
-    if (dragging) {
+    if (dragging && !((dragEndPosition - dragStartPosition) < 15)) {
         events = [...events, {
             name: 'New Event',
             description: '',
             color: 'gray',
             startTime: dragStartPosition,
             endTime: dragEndPosition,
+            tasks: [],
         }];
+
         dragging = false;
         dragStartPosition = 0;
         dragEndPosition = 0;
