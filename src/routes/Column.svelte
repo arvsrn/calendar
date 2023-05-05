@@ -78,11 +78,11 @@
             endTime: dragEndPosition,
             tasks: [],
         }];
+    } 
 
-        dragging = false;
-        dragStartPosition = 0;
-        dragEndPosition = 0;
-    }
+    dragging = false;
+    dragStartPosition = 0;
+    dragEndPosition = 0;
 }}/>
 
 <style>
