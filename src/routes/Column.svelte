@@ -42,6 +42,10 @@
     }}>
         {#each events as event, i}
             <Event
+                onDelete={() => {
+                    events.splice(i, 1);
+                    events = events; // trigger UI re-render
+                }}
                 startTime={event.startTime} 
                 endTime={event.endTime}
                 name={event.name}
@@ -61,8 +65,9 @@
 </main>
 
 <svelte:window on:mousemove={ev => {
-    if (dragging) 
+    if (dragging) {
         dragEndPosition += ev.movementY;
+    }
 }} on:mouseup={() => {
     if (dragging && !((dragEndPosition - dragStartPosition) < 15)) {
         events = [...events, {
@@ -90,7 +95,7 @@
     }
 
     main.dark {
-        background: #202020;
+        background: #1a1a1a;
     }
 
     main::-webkit-scrollbar,
@@ -115,7 +120,7 @@
     div.new {
         width: 100%;
         position: absolute;
-        background: rgba(184, 184, 184, 0.1);
+        background: rgba(255, 255, 255, 0.05);
         margin-top: -2px;
         margin-left: -2px;
     }
@@ -144,7 +149,7 @@
 
         position: sticky;
         top: 0;
-        background: #232323;
+        background: #1c1c1c;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.025);
         z-index: 6;

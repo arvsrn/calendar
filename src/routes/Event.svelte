@@ -108,6 +108,8 @@
             }
         }
     })(); */
+
+    export let onDelete: () => void;
 </script>
 
 <main on:contextmenu|preventDefault={event => {
@@ -168,7 +170,10 @@
                 </svg>
                 Edit Event
             </Option>
-            <Option label="Del" appearance="danger">
+            <Option label="Del" appearance="danger" onClick={() => {
+                showing = false;
+                onDelete();
+            }}>
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.1377 4.2777L2.39032 8.6162C2.4519 9.67382 3.32752 10.4999 4.38693 10.4999H6.69835C7.76826 10.4999 8.64868 9.65793 8.69636 8.58908L8.88871 4.2777M11 2.44437H9.16667H7.33333M0 2.44437H1.83333H3.66667M3.66667 2.44437V1.5C3.66667 0.947715 4.11438 0.5 4.66667 0.5H6.33333C6.88562 0.5 7.33333 0.947715 7.33333 1.5V2.44437M3.66667 2.44437H7.33333" stroke="currentColor"/>
                 </svg>                                   

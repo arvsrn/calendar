@@ -29,7 +29,7 @@
 
         border-right: 1px solid rgba(255, 255, 255, 0.05);
 
-        background: #232323;
+        background: #1c1c1c;
 
         height: fit-content;
         padding-top: 28px;
@@ -56,23 +56,23 @@
     }
 
     p {
-        font-size: 11px;
+        font-size: 10px;
         line-height: 13px;
         text-align: end;
         width: 100%;
         padding-right: 6px;
 
-        font-family: var(--font-mono);
-        color: rgba(255, 255, 255, 0.7);
+        font-family: var(--font-sans);
+        color: #7e7e7e;
         user-select: none;
     }
 
     p.currentTime {
-        font-weight: bold;
+        font-weight: 500;
         color: white;
         letter-spacing: 0.008em;
         position: relative;
-        overflow:visible;
+        overflow: visible;
     }
 
     /* p.currentTime::after {

@@ -25,10 +25,12 @@
         gap: 6px;
         padding: 0px 12px;
 
+        flex: none;
         cursor: pointer;
 
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-size: 12.5px;
+        user-select: none;
     }
 
     main.normal {

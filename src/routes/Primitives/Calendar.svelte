@@ -118,8 +118,8 @@
     }
 
     div.label:not(.static).active {
-        background: rgb(209, 90, 31);
-        border: 1px solid rgba(0, 0, 0, 0.5);
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.05);
         font-weight: bold;
     }
 

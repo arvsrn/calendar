@@ -104,7 +104,7 @@
         width: 271px;
         height: 100vh;
         
-        background: #1c1c1c;
+        background: #1f1f1f;
         border-right: 1px solid rgba(255, 255, 255, 0.075);
 
         flex: none;
@@ -126,6 +126,11 @@
 
         user-select: none;
         padding: 0px 16px;
+        margin-top: 8px;
+    }
+
+    nav > h1 {
+        margin-top: 0px !important;
     }
 
     section {

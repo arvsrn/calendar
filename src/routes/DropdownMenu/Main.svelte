@@ -16,9 +16,10 @@
     }
 
     export let onClickOutside: () => void = () => {};
+    export let fixedHeight: string | null = null;
 </script>
 
-<main out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
+<main class:scroll={fixedHeight} style={fixedHeight ? `height: ${fixedHeight}` : ''} out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
     <slot></slot>
 </main>
 
@@ -26,7 +27,7 @@
     main {
         overflow: hidden;
         outline: none;
-        background: #232323;
+        background: #202020;
         
         border: 1px solid rgba(255, 255, 255, 0.025);
         box-shadow: 0px 13px 5px rgba(0, 0, 0, 0.01), 
@@ -46,6 +47,10 @@
         animation: enter 0.05s var(--ease) 1;
         z-index: 101;
         cursor: default;
+    }
+
+    main.scroll {
+        overflow: scroll;
     }
 
     @keyframes enter {
