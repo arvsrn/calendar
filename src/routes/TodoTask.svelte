@@ -20,7 +20,7 @@
         </button>
     </div>
 
-    <p class:enabled={done} contenteditable={editable && !done} on:keydown={event => {
+    <p class:enabled={done} on:click={() => done = editable ? done : !done} contenteditable={editable && !done} on:keydown={event => {
         if (event.key == 'Enter') event.preventDefault();
     }}><slot></slot></p>
 
@@ -125,6 +125,11 @@
         text-decoration: line-through;
     }
 
+    p[contenteditable="false"] {
+        cursor: pointer;
+        user-select: none;
+    }
+
     div.onhover {
         position: absolute;
         top: 0px;
@@ -138,7 +143,11 @@
         
         height: 100%;
         width: 50px;
-        background: linear-gradient(90deg, #1f1f1f 0%, #1f1f1f 30%, #1f1f1f 100%);
+        background: linear-gradient(90deg,
+            rgba(31, 31, 31, 0), 
+            rgba(31, 31, 31, 0.8) 40%, 
+            rgba(31, 31, 31, 1.0) 60%
+        );
 
         z-index: 5;
     }

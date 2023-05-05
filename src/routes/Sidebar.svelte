@@ -56,7 +56,7 @@
 {:else if $app.showingSidebar}
 <!--I don't know how to not duplicate this code-->
 <Blanket bind:toggle={$app.showingSidebar}>
-    <main transition:slide={{ axis: 'x', duration: 180 }} style:margin-right="auto">
+    <main class="mobile" transition:slide={{ axis: 'x', duration: 180 }} style:margin-right="auto">
         <div class="container" out:fade={{ duration: 20 }} in:fade={{ duration: 20, delay: 160 }}>
             <nav>
                 <h1 style="padding:0px;display:flex;align-items:center;flex-direction:row;gap:5px;">
@@ -103,9 +103,6 @@
     main {
         width: 271px;
         height: 100vh;
-
-        position: absolute;
-        left: 0px;
         
         background: #1f1f1f;
         border-right: 1px solid rgba(255, 255, 255, 0.075);
@@ -115,6 +112,11 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
+    }
+
+    main.mobile {
+        position: absolute;
+        left: 0px;
     }
 
     h1 {
