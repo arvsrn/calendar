@@ -103,6 +103,9 @@
     main {
         width: 271px;
         height: 100vh;
+
+        position: absolute;
+        left: 0px;
         
         background: #1f1f1f;
         border-right: 1px solid rgba(255, 255, 255, 0.075);
