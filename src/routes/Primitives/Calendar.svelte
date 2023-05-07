@@ -54,6 +54,15 @@
             <div class="label dark">2</div>
             <div class="label dark">3</div>
         </div>
+        <div class="row">
+            <div class="label dark">4</div>
+            <div class="label dark">5</div>
+            <div class="label dark">6</div>
+            <div class="label dark">7</div>
+            <div class="label dark">8</div>
+            <div class="label dark">9</div>
+            <div class="label dark">10</div>
+        </div>
     </main>
 
     <!-- TODO: try and not hardcode the div height -->
@@ -118,8 +127,8 @@
     }
 
     div.label:not(.static).active {
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px solid rgba(255, 255, 255, 0.05);
+        background: #232323;
+        border: 1px solid rgba(255, 255, 255, 0.05);
         font-weight: bold;
     }
 

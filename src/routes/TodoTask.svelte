@@ -144,9 +144,9 @@
         height: 100%;
         width: 50px;
         background: linear-gradient(90deg,
-            rgba(31, 31, 31, 0), 
-            rgba(31, 31, 31, 0.8) 40%, 
-            rgba(31, 31, 31, 1.0) 60%
+            rgba(28, 28, 28, 0), 
+            rgba(28, 28, 28, 0.8) 40%, 
+            rgba(28, 28, 28, 1.0) 60%
         );
 
         z-index: 5;
