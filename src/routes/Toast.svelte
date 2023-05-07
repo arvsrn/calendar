@@ -113,4 +113,10 @@
         color: #ededed;
         background-color: rgba(255, 255, 255, 0.05);
     }
+    
+    @media only screen and (max-width: 450px) {
+        div.toast {
+            width: calc(100vw - 48px);
+        }
+    }
 </style>
