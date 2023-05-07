@@ -1,9 +1,15 @@
 <script lang="ts">
+    import { addNotification } from "../core";
     import type { CalendarEvent } from "../core";
+    import Main from "./DropdownMenu/Main.svelte";
+    import Option from "./DropdownMenu/Option.svelte";
     import Event from "./Event.svelte";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const hoursToMinutes = (hours: number, minutes: number = 0) => hours * 60 + minutes;
+
+    let mouse: [number, number] = [0, 0];
+    let showing: boolean = false;
 
     export let date: string = "";
     export let events: Array<CalendarEvent> = [
@@ -29,13 +35,17 @@
     let dragging: boolean = false;
     let dragStartPosition: number = 0;
     let dragEndPosition: number = 0;
+    let hovering: boolean = false;
 </script>
 
-<main bind:this={self} class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])}>
+<main bind:this={self} class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])} on:mouseenter={() => hovering = true} on:mouseleave={() => hovering = false}>
     <!-- TODO: make active class for current day -->
     <p class="active">{date}</p>
 
-    <div class="container" on:scroll|preventDefault={() => {}} on:mousedown|self={ev => {
+    <div on:contextmenu|preventDefault|self={event => {
+        showing = true;
+        mouse = [event.clientX, event.clientY];
+    }} class="container" on:scroll|preventDefault={() => {}} on:mousedown|self={ev => {
         dragging = true;
         dragStartPosition = ev.clientY + (self.parentElement?.scrollTop || 0) - 78; // 78 is height of navbar
         dragEndPosition = dragStartPosition;
@@ -64,6 +74,40 @@
     </div>
 </main>
 
+{#if showing}
+<div style="width:169px;height:fit-content;position:fixed;left:{mouse[0]}px;top:{mouse[1]}px;">
+    <Main onClickOutside={() => showing = false}>
+        <Option label="⌘V" onClick={() => {
+            showing = false;
+            navigator.clipboard.readText().then(text => {
+                if (text.startsWith('{')) {
+                    const event = JSON.parse(text);
+
+                    if (
+                        'startTime' in event &&
+                        'endTime' in event &&
+                        'color' in event &&
+                        'name' in event &&
+                        'description' in event &&
+                        'tasks' in event
+                    ) {
+                        const difference = event['endTime'] - event['startTime'];
+                        event['startTime'] = mouse[1] - 78;
+                        event['endTime'] = event['startTime'] + difference;
+                        events = [...events, event];
+
+                        addNotification({
+                            heading: "Event pasted",
+                            description: `"${event.name}"`,
+                        });
+                    }
+                }
+            });
+        }}>Paste here</Option>
+    </Main>
+</div>
+{/if}
+
 <svelte:window on:mousemove={ev => {
     if (dragging) {
         dragEndPosition += ev.movementY;
@@ -83,6 +127,29 @@
     dragging = false;
     dragStartPosition = 0;
     dragEndPosition = 0;
+}} on:paste={event => {
+    // @ts-ignore
+    let text = (event.clipboardData || window.clipboardData).getData("text");
+
+    if (text.startsWith('{') && hovering) {
+        const event = JSON.parse(text);
+
+        if (
+            'startTime' in event &&
+            'endTime' in event &&
+            'color' in event &&
+            'name' in event &&
+            'description' in event &&
+            'tasks' in event
+        ) {
+            events = [...events, event];
+
+            addNotification({
+                heading: "Event pasted",
+                description: `"${event.name}"`,
+            });
+        }
+    }
 }}/>
 
 <style>
@@ -92,10 +159,11 @@
 
         flex: none;
         position: relative;
+        background: #1f1f1f;
     }
 
     main.dark {
-        background: #1a1a1a;
+        background: #1d1d1d;
     }
 
     main::-webkit-scrollbar,
@@ -131,6 +199,7 @@
         background: rgba(255, 255, 255, 0.025);
         flex: none;
         position: absolute;
+        pointer-events: none;
     }
 
     p {
@@ -149,7 +218,7 @@
 
         position: sticky;
         top: 0;
-        background: #1c1c1c;
+        background: #1f1f1f;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.025);
         z-index: 6;

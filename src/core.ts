@@ -23,6 +23,11 @@ interface App {
     showingSidebar: boolean;
 }
 
+export interface Toast {
+    heading: string;
+    description?: string;
+}
+
 export const app = writable<App>({
     viewportDays: 5,
     todaysTasks: [
@@ -34,6 +39,8 @@ export const app = writable<App>({
     showingSidebar: false,
 });
 
+export const notifications = writable<Toast[]>([]);
+
 export const getCompletedTasks = (tasks: Array<Task>): Array<Task> => tasks.filter(n => n.completed);
 export const incrementViewportDays = (by: number) => {
     document.documentElement.style.setProperty('--viewport-days',
@@ -44,3 +51,12 @@ export const incrementViewportDays = (by: number) => {
         return app;
     });
 };
+export const addNotification = (notification: Toast) => {
+    notifications.update(n => [...n, notification]);
+};
+export const removeNotification = (index: number) => {
+    notifications.update(n => {
+        n.splice(index);
+        return n;
+    });
+}

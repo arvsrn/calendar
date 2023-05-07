@@ -104,7 +104,7 @@
         width: 271px;
         height: 100vh;
         
-        background: #1f1f1f;
+        background: #1C1C1C;
         border-right: 1px solid rgba(255, 255, 255, 0.075);
 
         flex: none;

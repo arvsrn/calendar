@@ -1,17 +1,24 @@
 <script lang="ts">
     import { fade, slide } from "svelte/transition";
-
-    export function clickOutside(node: HTMLElement, handler: () => void): { destroy: () => void } {
-        const onClick = (event: MouseEvent) => node &&
+    
+    export function clickOutside(
+        node: HTMLElement,
+        handler: () => void
+    ): { destroy: () => void } {
+        const onClick = (event: MouseEvent) =>
+            node &&
             !node.contains(event.target as HTMLElement) &&
             !event.defaultPrevented &&
             handler();
 
-        document.addEventListener('click', onClick, true);
-        document.addEventListener('contextmenu', onClick, true);
+            document.addEventListener('click', onClick, true);
+            document.addEventListener('contextmenu', onClick, true);
 
         return {
-            destroy: () => document.removeEventListener('click', onClick, true),
+            destroy() {
+                document.removeEventListener('click', onClick, true);
+                document.removeEventListener('contextmenu', onClick, true);
+            },
         };
     }
 

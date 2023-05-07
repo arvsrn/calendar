@@ -71,6 +71,8 @@
         padding-right: 12px;
         flex: none;
 
+        background: #1f1f1f;
+
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
