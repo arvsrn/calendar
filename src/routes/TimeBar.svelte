@@ -29,7 +29,7 @@
 
         border-right: 1px solid rgba(255, 255, 255, 0.05);
 
-        background: #1f1f1f;
+        background: #161616;
 
         height: fit-content;
         padding-top: 28px;

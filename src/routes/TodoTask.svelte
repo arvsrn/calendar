@@ -23,34 +23,6 @@
     <p class:enabled={done} on:click={() => done = editable ? done : !done} contenteditable={editable && !done} on:keydown={event => {
         if (event.key == 'Enter') event.preventDefault();
     }}><slot></slot></p>
-
-    <div class="onhover" class:hoverout={!showing}>
-        <button class="options" on:click={() => showing = true}>
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.625 2.5C8.625 3.12132 8.12132 3.625 7.5 3.625C6.87868 3.625 6.375 3.12132 6.375 2.5C6.375 1.87868 6.87868 1.375 7.5 1.375C8.12132 1.375 8.625 1.87868 8.625 2.5ZM8.625 7.5C8.625 8.12132 8.12132 8.625 7.5 8.625C6.87868 8.625 6.375 8.12132 6.375 7.5C6.375 6.87868 6.87868 6.375 7.5 6.375C8.12132 6.375 8.625 6.87868 8.625 7.5ZM7.5 13.625C8.12132 13.625 8.625 13.1213 8.625 12.5C8.625 11.8787 8.12132 11.375 7.5 11.375C6.87868 11.375 6.375 11.8787 6.375 12.5C6.375 13.1213 6.87868 13.625 7.5 13.625Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-
-            {#if showing}
-            <div style:width="200px" style:position="absolute" style:top="100%" style:right="0px">
-                <Main onClickOutside={() => showing = false}>
-                    {#if origin === 'indirect'}
-                    <Option label="⌘E">
-                        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.5 0.5H2.5C1.39543 0.5 0.5 1.39543 0.5 2.5V9.5C0.5 10.6046 1.39543 11.5 2.5 11.5H4.5M9.5 11.5H11.5C12.6046 11.5 13.5 10.6046 13.5 9.5V2.5C13.5 1.39543 12.6046 0.5 11.5 0.5H9.5M9.5 8.5H4.5C3.94772 8.5 3.5 8.05228 3.5 7.5V4.5C3.5 3.94772 3.94772 3.5 4.5 3.5H9.5C10.0523 3.5 10.5 3.94772 10.5 4.5V7.5C10.5 8.05228 10.0523 8.5 9.5 8.5Z" stroke="currentColor"/>
-                        </svg>                              
-                        Go to Event
-                    </Option>
-                    {:else}
-                    <Option label="Del" appearance="danger">
-                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.1377 4.2777L2.39032 8.6162C2.4519 9.67382 3.32752 10.4999 4.38693 10.4999H6.69835C7.76826 10.4999 8.64868 9.65793 8.69636 8.58908L8.88871 4.2777M11 2.44437H9.16667H7.33333M0 2.44437H1.83333H3.66667M3.66667 2.44437V1.5C3.66667 0.947715 4.11438 0.5 4.66667 0.5H6.33333C6.88562 0.5 7.33333 0.947715 7.33333 1.5V2.44437M3.66667 2.44437H7.33333" stroke="currentColor"/>
-                        </svg>                                   
-                        Delete
-                    </Option>
-                    {/if}
-                </Main>
-            </div>
-            {/if}
-        </button>
-    </div>
 </main>
 
 <style>
@@ -63,6 +35,14 @@
         gap: 8px;
 
         position: relative;
+        padding: 5px;
+        transform: translate(-5px, -5px);
+        border-radius: 10px;
+        transition: background 0.15s var(--ease);
+    }
+
+    main:hover {
+        background: rgba(255, 255, 255, 0.05);
     }
 
     div.check-container {
@@ -73,7 +53,7 @@
     button {
         outline: none;
         border: 1.5px solid rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
+        border-radius: 5px;
 
         width: 16px;
         height: 16px;

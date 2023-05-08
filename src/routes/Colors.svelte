@@ -3,7 +3,7 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
 
-    export let choices: Array<string> = ["#E93F33", "#ED773D", "#F4BE40", "#66CC8A", "#4CA8DF", "#985DF6", "#B8B8B8"];
+    export let choices: Array<string> = ["#FC4F4F", "#D36D41", "#E8B638", "#57CE55", "#4191DB", "#C072F0", "#B8B8B8"];
     export let current: string = choices[0];
     export let currentIndex: number = 0;
 
@@ -33,15 +33,17 @@
     }
 
     div {
-        width: 12px;
-        height: 12px;
-        border-radius: 4px;
+        width: 16px;
+        height: 16px;
+        border-radius: 6.5px;
         cursor: default;
         transition: transform 0.1s var(--ease);
         
         display: flex;
         align-items: center;
         justify-content: center;
+
+        border: 2px solid rgba(255, 255, 255, 0.2);
     }
 
     div.selected {

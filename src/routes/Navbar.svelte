@@ -16,10 +16,7 @@
 <main>
     <h1>
         April <span>2023</span> 
-        <span>
-            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 1L1 8" stroke="#7e7e7e"/>
-            </svg>            
+        <span>   
             <div class="container">
                 <button on:click={() => showing = true}>
                     W9
@@ -71,7 +68,7 @@
         padding-right: 12px;
         flex: none;
 
-        background: #1f1f1f;
+        background: #161616;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
@@ -101,7 +98,7 @@
         padding: 2px 6px;
         margin-left: -4px;
 
-        border: none;
+        border: 1px solid rgba(255, 255, 255, 0.05);
         background: transparent;
         border-radius: 6px;
         
@@ -109,15 +106,17 @@
         cursor: pointer;
         user-select: none;
 
-        font-size: 16px;
+        font-size: 13px;
         font-weight: normal;
-        color: #a0a0a0;
+        color: #ededed;
         transition: background 0.1s var(--ease);
 
         display: flex;
         flex-direction: row;
         gap: 6px;
         align-items: center;
+
+        margin-left: 4px;
     }
 
     /* hardcoded to center (visually) because css hates me */

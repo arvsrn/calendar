@@ -159,11 +159,11 @@
 
         flex: none;
         position: relative;
-        background: #1f1f1f;
+        background: #161616;
     }
 
     main.dark {
-        background: #1d1d1d;
+        background: #161616;
     }
 
     main::-webkit-scrollbar,
@@ -218,9 +218,13 @@
 
         position: sticky;
         top: 0;
-        background: #1f1f1f;
+        background: #161616;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.025);
         z-index: 6;
+    }
+
+    main.dark > p {
+        background: #161616;
     }
 </style>

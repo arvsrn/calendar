@@ -70,7 +70,7 @@
             </section>
         
             <h1>Today's Tasks</h1>
-            <section>  
+            <section style:gap="0px">  
                 <!--
                     <p>Tasks you've added to events will show up here.</p>
                 --> 
@@ -104,7 +104,7 @@
         width: 271px;
         height: 100vh;
         
-        background: #1C1C1C;
+        background: #161616;
         border-right: 1px solid rgba(255, 255, 255, 0.075);
 
         flex: none;
