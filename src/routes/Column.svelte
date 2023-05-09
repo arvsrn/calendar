@@ -56,11 +56,11 @@
                     events.splice(i, 1);
                     events = events; // trigger UI re-render
                 }}
-                startTime={event.startTime} 
-                endTime={event.endTime}
-                name={event.name}
-                description={event.description}
-                color={event.color}
+                bind:startTime={event.startTime} 
+                bind:endTime={event.endTime}
+                bind:name={event.name}
+                bind:description={event.description}
+                bind:color={event.color}
             ></Event>
         {/each}
 

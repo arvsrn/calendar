@@ -4,6 +4,7 @@
     import UserAvatar from "./UserAvatar.svelte";
     import Main from "./DropdownMenu/Main.svelte";
     import Option from "./DropdownMenu/Option.svelte";
+  import Button from "./Primitives/Button.svelte";
 
     onMount(() => {
         incrementViewportDays(0);
@@ -19,7 +20,7 @@
         <span>   
             <div class="container">
                 <button on:click={() => showing = true}>
-                    W9
+                    W32
                     <svg width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.5 0.5L3.5 3.5L6.5 0.5" stroke="currentColor"/>
                     </svg>                        

@@ -129,7 +129,9 @@
     <div class="handle-down" on:mousedown={e => onDragStart(Dragging.BOTTOM)}></div>
 
     <h1 on:mousedown|self={e => onDragStart(Dragging.SELF)}>{name}</h1>
+    {#if height > 60}
     <p on:mousedown|self={e => onDragStart(Dragging.SELF)} style:color="white">{description}</p>
+    {/if}
     <p on:mousedown|self={e => onDragStart(Dragging.SELF)}>
         {
             Math.floor(finalStartTime/60) <= 12 ? 
@@ -268,6 +270,7 @@
         cursor: grab;
         overflow: hidden;
         z-index: 2;
+        border-top: 1px solid rgba(255, 255, 255, 0.025);
 
         transition: background 0.15s var(--ease);
     }

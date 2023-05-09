@@ -123,7 +123,7 @@
     }
 
     div.label:not(.static):hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
     }
 
     div.label:not(.static).active {
@@ -160,6 +160,6 @@
     }
 
     button:hover {
-        background: rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.05);
     }
 </style>
