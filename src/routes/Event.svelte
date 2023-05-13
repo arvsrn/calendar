@@ -12,7 +12,7 @@
     import TodoTaskNew from "./TodoTaskNew.svelte";
     import { addNotification, type CalendarEvent } from "../core";
     import { clickOutside } from "svelte-use-click-outside";
-  import { fade } from "svelte/transition";
+    import { fade } from "svelte/transition";
 
     type COLORS = 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
     const COLORS: Array<COLORS> = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'gray'];

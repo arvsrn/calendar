@@ -13,7 +13,7 @@
     import TextInput from "./Primitives/TextInput.svelte";
     import EditTask from "./Popups/EditTask.svelte";
     import DeleteTask from "./Popups/DeleteTask.svelte";
-    import { app } from "../core";
+    import { app, incrementViewportDays } from "../core";
     import SettingsMenu from "./SettingsMenu.svelte";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -38,6 +38,22 @@
         </div>
     </div>
 </main>
+
+<svelte:window on:keypress={(event) => {
+    if (event.ctrlKey && (event.code == 'Equal' || event.code == 'Minus')) {
+        event.preventDefault();
+        const difference = event.code == 'Minus' ? -1 : 1;
+        if ($app.viewportDays + difference > 0 && $app.viewportDays + difference <= 9)
+            incrementViewportDays(difference);
+    }
+    else if (event.code.startsWith('Digit')) {
+        const number = parseInt(event.key);
+        const difference = number - $app.viewportDays;
+        incrementViewportDays(difference);
+    }
+    else if (event.code == 'KeyB' && event.ctrlKey)
+        $app.showingSidebar = !$app.showingSidebar;
+}} />
 
 <style>
     main {
