@@ -29,7 +29,7 @@
 
         border-right: 1px solid rgba(255, 255, 255, 0.05);
 
-        background: #161616;
+        background: #141414;
 
         height: fit-content;
         padding-top: 28px;
@@ -75,10 +75,10 @@
         overflow: visible;
     }
 
-    /* p.currentTime::after {
+    p.currentTime::after {
         content: "";
         width: 100vw;
-        background: #a0a0a0;
+        background: rgba(255, 255, 255, 0.1);
         height: 1px;
 
         position: absolute;
@@ -86,5 +86,5 @@
         top: calc(50% - 1.5px);
         transform: translateX(1px);
         z-index: -1;
-    } */
+    }
 </style>

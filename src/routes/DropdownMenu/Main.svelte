@@ -24,9 +24,10 @@
 
     export let onClickOutside: () => void = () => {};
     export let fixedHeight: string | null = null;
+    export let style: string = "";
 </script>
 
-<main class:scroll={fixedHeight} style={fixedHeight ? `height: ${fixedHeight}` : ''} out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
+<main class:scroll={fixedHeight} style={fixedHeight ? `height: ${fixedHeight}; ${style}` : style} out:fade={{ duration: 150 }} use:clickOutside={onClickOutside}>
     <slot></slot>
 </main>
 

@@ -72,41 +72,41 @@
         <div class="divider" style:top="{60 * i}px"></div>
         {/each}
     </div>
-</main>
 
-{#if showing}
-<div style="width:169px;height:fit-content;position:fixed;left:{mouse[0]}px;top:{mouse[1]}px;">
-    <Main onClickOutside={() => showing = false}>
-        <Option label="⌘V" onClick={() => {
-            showing = false;
-            navigator.clipboard.readText().then(text => {
-                if (text.startsWith('{')) {
-                    const event = JSON.parse(text);
+    {#if showing}
+    <div style="width:169px;height:fit-content;position:fixed;left:{mouse[0]}px;top:{mouse[1]}px;z-index:200;">
+        <Main onClickOutside={() => showing = false}>
+            <Option label="⌘V" onClick={() => {
+                showing = false;
+                navigator.clipboard.readText().then(text => {
+                    if (text.startsWith('{')) {
+                        const event = JSON.parse(text);
 
-                    if (
-                        'startTime' in event &&
-                        'endTime' in event &&
-                        'color' in event &&
-                        'name' in event &&
-                        'description' in event &&
-                        'tasks' in event
-                    ) {
-                        const difference = event['endTime'] - event['startTime'];
-                        event['startTime'] = mouse[1] - 78;
-                        event['endTime'] = event['startTime'] + difference;
-                        events = [...events, event];
+                        if (
+                            'startTime' in event &&
+                            'endTime' in event &&
+                            'color' in event &&
+                            'name' in event &&
+                            'description' in event &&
+                            'tasks' in event
+                        ) {
+                            const difference = event['endTime'] - event['startTime'];
+                            event['startTime'] = mouse[1] - 78;
+                            event['endTime'] = event['startTime'] + difference;
+                            events = [...events, event];
 
-                        addNotification({
-                            heading: "Event pasted",
-                            description: `"${event.name}"`,
-                        });
+                            addNotification({
+                                heading: "Event pasted",
+                                description: `"${event.name}"`,
+                            });
+                        }
                     }
-                }
-            });
-        }}>Paste here</Option>
-    </Main>
-</div>
-{/if}
+                });
+            }}>Paste here</Option>
+        </Main>
+    </div>
+    {/if}
+</main>
 
 <svelte:window on:mousemove={ev => {
     if (dragging) {
@@ -159,11 +159,11 @@
 
         flex: none;
         position: relative;
-        background: #161616;
+        background: #141414;
     }
 
     main.dark {
-        background: #161616;
+        background: #141414;
     }
 
     main::-webkit-scrollbar,
@@ -218,13 +218,13 @@
 
         position: sticky;
         top: 0;
-        background: #161616;
+        background: #141414;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.025);
         z-index: 6;
     }
 
     main.dark > p {
-        background: #161616;
+        background: #141414;
     }
 </style>

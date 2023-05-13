@@ -11,7 +11,7 @@
     export let editable: boolean = false;
 </script>
 
-<main on:click={() => done = editable ? done : !done}>
+<main on:click|self={() => done = editable ? done : !done}>
     <div class="check-container">
         <button class:enabled={done} on:click={() => done = !done}>
         {#if done}
@@ -20,7 +20,7 @@
         </button>
     </div>
 
-    <p class:enabled={done} contenteditable={editable && !done} on:keydown={event => {
+    <p on:click|self={() => done = editable ? done : !done} class:enabled={done} contenteditable={editable && !done} on:keydown={event => {
         if (event.key == 'Enter') event.preventDefault();
     }}><slot></slot></p>
 </main>

@@ -4,7 +4,9 @@
     import UserAvatar from "./UserAvatar.svelte";
     import Main from "./DropdownMenu/Main.svelte";
     import Option from "./DropdownMenu/Option.svelte";
-  import Button from "./Primitives/Button.svelte";
+    import Button from "./Primitives/Button.svelte";
+    import Calendar from "./Primitives/Calendar.svelte";
+    import { fade } from "svelte/transition";
 
     onMount(() => {
         incrementViewportDays(0);
@@ -19,20 +21,26 @@
         April <span>2023</span> 
         <span>   
             <div class="container">
-                <button on:click={() => showing = true}>
+                <button class="x" on:click={() => showing = true}>
                     W32
                     <svg width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.5 0.5L3.5 3.5L6.5 0.5" stroke="currentColor"/>
+                        <path d="M0.5 0.5L3.5 3.5L6.5 0.5" stroke="#a0a0a0"/>
                     </svg>                        
                 </button>
                 {#if showing}
-                <div style:width="200px" style:position="absolute" style:top="calc(100% + 2px)" style:left="-4px" style:z-index="297">
-                    <Main fixedHeight="200px" onClickOutside={() => showing = false}>
-                        {#each [...Array(54).keys()] as i}
-                        <Option label="⌘W{i + 1}">Week {i + 1}</Option>
-                        {/each}
+                <div style:width="260px" style:position="absolute" style:top="calc(100% + 2px)" style:left="-4px" style:z-index="297">
+                    <Main onClickOutside={() => showing = false} style="background: #232323;">
+                        <div style:padding="8px 12px">
+                            <Calendar></Calendar>
+                        </div>
                     </Main>
                 </div>
+                {:else}
+                <button transition:fade={{ duration: 80 }}>
+                    <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.5 3.5C2.5 3.5 5 3.5 7 3.5C9 3.5 9.5 5.16667 9.5 6V6.5C9.5 7.16667 9.1 8.5 7.5 8.5H6.5M1.5 3.5L4.5 0.5M1.5 3.5L4.5 6.5" stroke="currentColor"/>
+                    </svg>                
+                </button>
                 {/if}
             </div>
         </span>
@@ -54,6 +62,13 @@
                 <path d="M5.5 0.5H2.5C1.39543 0.5 0.5 1.39543 0.5 2.5V9.5C0.5 10.6046 1.39543 11.5 2.5 11.5H5.5M5.5 0.5H11.5C12.6046 0.5 13.5 1.39543 13.5 2.5V9.5C13.5 10.6046 12.6046 11.5 11.5 11.5H5.5M5.5 0.5V11.5M2 2.5H4M2 4.5H4M2 6.5H4" stroke="currentColor"/>
             </svg>            
         </button>
+        <!--
+        <button style:margin-right="8px">
+            <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H2V2H0V0ZM4 0H6V2H4V0ZM10 0H8V2H10V0Z" fill="currentColor"/>
+            </svg>
+        </button>
+        -->
     </div>
 </main>
 
@@ -69,7 +84,7 @@
         padding-right: 12px;
         flex: none;
 
-        background: #161616;
+        background: #141414;
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
@@ -93,13 +108,13 @@
         color: #a0a0a0;
     }
 
-    h1 > span > div.container > button {
+    h1 > span > div.container > button.x {
         width: fit-content;
         height: fit-content;
-        padding: 2px 6px;
+        padding: 3px 7px;
         margin-left: -4px;
 
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.075);
         background: transparent;
         border-radius: 6px;
         
@@ -129,6 +144,11 @@
         width: fit-content;
         height: fit-content;
         position: relative;
+
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        align-items: center;
     }
 
     p {
@@ -168,6 +188,10 @@
 
     button:hover, h1 > span > div.container > button:hover {
         background: rgba(255, 255, 255, 0.06);
+    }
+
+    h1 > span > div.container > button:hover {
+        border: 1px solid transparent;
     }
 
     div.divider {

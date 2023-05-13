@@ -35,10 +35,6 @@
             </h1>
         </nav>
         
-        <section style:margin-top="12px">
-            <Calendar></Calendar>
-        </section>
-    
         <h1>Today's Tasks</h1>
         <section>  
             <!--
@@ -64,13 +60,9 @@
                     Untitled Calendar App
                 </h1>
             </nav>
-            
-            <section style:margin-top="12px">
-                <Calendar></Calendar>
-            </section>
         
             <h1>Today's Tasks</h1>
-            <section style:gap="0px">  
+            <section style:gap="0px">
                 <!--
                     <p>Tasks you've added to events will show up here.</p>
                 --> 
@@ -104,7 +96,7 @@
         width: 271px;
         height: 100vh;
         
-        background: #161616;
+        background: #141414;
         border-right: 1px solid rgba(255, 255, 255, 0.075);
 
         flex: none;
@@ -131,11 +123,11 @@
 
         user-select: none;
         padding: 0px 16px;
-        margin-top: 8px;
+        margin: 8px 0px;
     }
 
     nav > h1 {
-        margin-top: 0px !important;
+        margin: 0px !important;
     }
 
     section {

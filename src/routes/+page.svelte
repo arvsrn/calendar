@@ -14,7 +14,7 @@
     import EditTask from "./Popups/EditTask.svelte";
     import DeleteTask from "./Popups/DeleteTask.svelte";
     import { app } from "../core";
-  import SettingsMenu from "./SettingsMenu.svelte";
+    import SettingsMenu from "./SettingsMenu.svelte";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let width: string = "";
