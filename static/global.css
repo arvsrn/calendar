@@ -26,3 +26,22 @@ body {
 
     background: #1c1c1c;
 }
+
+/* stagger animation */
+[data-animate] {
+    animation: enter .3s both;
+    -webkit-animation-delay: calc(var(--stagger) * 100ms);
+    animation-delay: calc(var(--stagger) * 100ms);
+}
+
+@keyframes enter { 
+    from {
+        transform: translateY(10px);
+        opacity: 0%;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}

@@ -99,7 +99,11 @@
                                 heading: "Event pasted",
                                 description: `"${event.name}"`,
                             });
+                        } else {
+                            addNotification({ heading: "Nothing to paste", description: "Only events are supported." });
                         }
+                    } else {
+                        addNotification({ heading: "Nothing to paste", description: "Only events are supported." });
                     }
                 });
             }}>Paste here</Option>
@@ -148,7 +152,11 @@
                 heading: "Event pasted",
                 description: `"${event.name}"`,
             });
+        } else {
+            addNotification({ heading: "Nothing to paste", description: "Only events are supported." });
         }
+    } else {
+        addNotification({ heading: "Nothing to paste", description: "Only events are supported." });
     }
 }}/>
 

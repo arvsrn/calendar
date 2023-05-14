@@ -7,13 +7,16 @@
     import Button from "./Primitives/Button.svelte";
     import Calendar from "./Primitives/Calendar.svelte";
     import { fade } from "svelte/transition";
+  import Blanket from "./Primitives/Blanket.svelte";
+  import SettingsMenu from "./SettingsMenu.svelte";
 
     onMount(() => {
         incrementViewportDays(0);
         window.addEventListener('resize', _ => incrementViewportDays(0));
     });
 
-    let showing: boolean = false;
+    let showingCalendarMenu: boolean = false;
+    let showingSettingsMenu: boolean = false;
 </script>
 
 <main>
@@ -21,15 +24,15 @@
         April <span>2023</span> 
         <span>   
             <div class="container">
-                <button class="x" on:click={() => showing = true}>
+                <button class="x" on:click={() => showingCalendarMenu = true}>
                     W32
                     <svg width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.5 0.5L3.5 3.5L6.5 0.5" stroke="#a0a0a0"/>
                     </svg>                        
                 </button>
-                {#if showing}
+                {#if showingCalendarMenu}
                 <div style:width="260px" style:position="absolute" style:top="calc(100% + 2px)" style:left="-4px" style:z-index="297">
-                    <Main onClickOutside={() => showing = false} style="background: #232323;">
+                    <Main onClickOutside={() => showingCalendarMenu = false} style="background: #1c1c1c;">
                         <div style:padding="8px 12px">
                             <Calendar></Calendar>
                         </div>

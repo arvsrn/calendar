@@ -9,6 +9,10 @@
     <slot></slot>
 </main>
 
+<svelte:window on:keydown={event => {
+    if (event.code === 'Escape') toggle = false;
+}} />
+
 <style>
     main {
         width: 100vw;
