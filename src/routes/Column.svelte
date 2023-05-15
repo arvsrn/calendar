@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
     import { addNotification } from "../core";
     import type { CalendarEvent } from "../core";
     import Main from "./DropdownMenu/Main.svelte";
@@ -11,6 +12,7 @@
     let mouse: [number, number] = [0, 0];
     let showing: boolean = false;
 
+    export let dateObj: Date;
     export let date: string = "";
     export let events: Array<CalendarEvent> = [
         {
@@ -38,9 +40,9 @@
     let hovering: boolean = false;
 </script>
 
-<main bind:this={self} class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])} on:mouseenter={() => hovering = true} on:mouseleave={() => hovering = false}>
+<main class="column" bind:this={self} class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])} on:mouseenter={() => hovering = true} on:mouseleave={() => hovering = false}>
     <!-- TODO: make active class for current day -->
-    <p class="active">{date}</p>
+    <p class:active={dateObj.getUTCDate() == new Date().getUTCDate()}>{date}</p>
 
     <div on:contextmenu|preventDefault|self={event => {
         showing = true;
@@ -234,5 +236,20 @@
 
     main.dark > p {
         background: #141414;
+    }
+
+    p.active {
+        color: white;
+    }
+
+    p.active::before {
+        content: "";
+        display: inline-block;
+        flex: none;
+        width: 6px;
+        height: 6px;
+        border-radius: 6px;
+        background: white;
+        margin-right: 4px;
     }
 </style>

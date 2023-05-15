@@ -7,8 +7,8 @@
     import Button from "./Primitives/Button.svelte";
     import Calendar from "./Primitives/Calendar.svelte";
     import { fade } from "svelte/transition";
-  import Blanket from "./Primitives/Blanket.svelte";
-  import SettingsMenu from "./SettingsMenu.svelte";
+    import Blanket from "./Primitives/Blanket.svelte";
+    import SettingsMenu from "./SettingsMenu.svelte";
 
     onMount(() => {
         incrementViewportDays(0);
@@ -17,11 +17,13 @@
 
     let showingCalendarMenu: boolean = false;
     let showingSettingsMenu: boolean = false;
+    export let currentMonth: string;
+    export let currentYear: number = 2023;
 </script>
 
 <main>
     <h1>
-        April <span>2023</span> 
+        {currentMonth} <span>{currentYear}</span> 
         <span>   
             <div class="container">
                 <button class="x" on:click={() => showingCalendarMenu = true}>

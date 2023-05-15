@@ -15,26 +15,59 @@
     import DeleteTask from "./Popups/DeleteTask.svelte";
     import { app, incrementViewportDays } from "../core";
     import SettingsMenu from "./SettingsMenu.svelte";
+    import { getVelocity } from "../engine";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     let width: string = "";
+    let viewport: HTMLElement;
+
+    let lastScrollLeft = 0;
+    let lastScrollTime = Date.now();
+    let currentMonth = months[new Date().getUTCMonth()];
 
     app.subscribe(value => {
         width = value.showingSidebar ? `calc(100% - 271px)` : '100%';
     });
+
+    // runs every 100 milliseconds
+    const update = () => {
+        if (Date.now() - lastScrollTime > 300) {
+            const width = document.getElementsByClassName('column')[0].clientWidth;
+            viewport.scroll({
+                left: ((viewport.scrollLeft % width) < (width/2)) 
+                    ? (viewport.scrollLeft - (viewport.scrollLeft % width)) 
+                    : (viewport.scrollLeft + width - (viewport.scrollLeft % width)),
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+        setTimeout(update, 100);
+    };
+
+    onMount(update);
 </script>
 
 <main>
     <Sidebar></Sidebar>
     <div class="viewport" style:width={width}>
-        <Navbar></Navbar>
+        <Navbar bind:currentMonth={currentMonth}></Navbar>
         <div class="viewport-inner">
-            <Viewport>
+            <!-- preventDefault might cause some bugs lol but it works rn so idc -->
+            <div id="viewport" bind:this={viewport} on:scroll|preventDefault={event => {
+                let dx = -(lastScrollLeft - viewport.scrollLeft);
+
+                lastScrollLeft = viewport.scrollLeft;
+                lastScrollTime = Date.now();
+            }}>
                 <TimeBar></TimeBar>
-                {#each [...Array(30).keys()] as i}
-                <Column date="{days[new Date(`4/${i+1}/23`).getDay()]} {i + 1}"/>
+                {#each [...Array(365).keys()] as i}
+                    <Column 
+                        dateObj={new Date((19_358 + i)*8.64e7)} 
+                        date="{days[new Date((19_358 + i)*8.64e7).getDay()]} {new Date((19_358 + i)*8.64e7).getUTCDate()}"
+                    /> 
                 {/each}
-            </Viewport>
+            </div>
         </div>
     </div>
 </main>
@@ -87,5 +120,19 @@
         .viewport {
             width: 100%;
         }
+    }
+
+    #viewport {
+        width: 100%;
+        height: 100%;
+
+        overflow: scroll;
+
+        display: flex;
+        flex-direction: row;
+    }
+
+    #viewport::-webkit-scrollbar {
+        display: none;
     }
 </style>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { fade } from "svelte/transition";
+
     export let close: () => void;
     
     let selected: number = 0;
@@ -14,13 +16,11 @@
                 <p style="font-size:13px;color:#a0a0a0;font-weight:normal">duclit451@gmail.com</p>
             </div>
             <button>
-                <svg width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class:rotate={showingAccounts} width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.5 1L3.5 4L6.5 1" stroke="currentColor"/>
                 </svg>     
             </button>           
         </div>
-
-        <div class="divider" style:margin="8px 0px"></div>
 
         {#if showingAccounts}
         <div class="account" data-animate style:--stagger={1}>
@@ -38,6 +38,7 @@
             </div>        
         </div>
         {:else}
+        <div transition:fade={{ duration: 120 }} class="divider" style:margin="8px 0px"></div>
         <button data-animate style:--stagger={1} on:click={() => selected = 0} class:active={selected === 0}>Account</button>
         <button data-animate style:--stagger={2} on:click={() => selected = 1} class:active={selected === 1}>Calendar</button>
         <button data-animate style:--stagger={3} on:click={() => selected = 2} class:active={selected === 2}>Preferences</button>
@@ -53,6 +54,17 @@
             </button>
         </nav>
         <div class="divider" style:margin="4px 0px"></div>
+        <div class="content-inner">
+            <!--
+            <div style="background:rgba(255, 255, 255, 0.025);height:fit-content;width:100%;border-radius:12px;display:flex;flex-direction:row;padding:40px;gap:40px;display:flex;flex-direction:column;">
+                <img style="width:64px;height:64px;border-radius:32px;" draggable="false" src="https://res.cloudinary.com/read-cv/image/upload/c_fill,h_92,w_92/dpr_1.0/v1/1/profilePhotos/UmuuDwC2ozQnJxRRFIiBSGsMhg62/647f7013-3b34-460e-8fe3-664ab0560d82.jpg?_a=ATO2BAA0" alt="">
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                    <p style="font-size:16px;font-weight:500;color:#ededed;">Aarav Sareen</p>
+                    <p style="font-size:16px;font-weight:500;color:#7e7e7e;">duclit451@gmail.com</p>
+                </div>
+            </div>
+            -->
+        </div>
     </div>
 </main>
 
@@ -79,12 +91,22 @@
         height: 100%;
         border-right: 1px solid rgba(255, 255, 255, 0.025);
         flex: none;
+        background: #202020;
     }
 
     div.content {
         width: 100%;
         height: 100%;
         
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.content-inner {
+        width: 100%;
+        height: 100%;
+        padding: 24px;
+
         display: flex;
         flex-direction: column;
     }
@@ -116,6 +138,14 @@
 
     div.sidebar > button:hover {
         background: rgba(255, 255, 255, 0.025);
+    }
+
+    svg {
+        transition: transform 0.15s var(--ease);
+    }
+
+    .rotate {
+        transform: rotate(180deg);
     }
 
     div.account {
@@ -173,7 +203,7 @@
 
     nav {
         height: 50px;
-        padding: 8px 12px;
+        padding: 8px 20px;
         margin: 4px;
 
         font-size: 14px;
@@ -185,6 +215,7 @@
         align-items: center;
         gap: 2px;
         user-select: none;
+        flex: none;
     }
 
     div.divider {

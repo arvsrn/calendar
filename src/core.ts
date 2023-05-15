@@ -5,12 +5,14 @@ interface Task {
     completed: boolean;
 }
 
+type Color = 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
+
 export interface CalendarEvent {
     startTime: number;
     endTime: number;
     name: string;
     description: string;
-    color: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
+    color: Color;
     tasks: Array<Task>;
 }
 
@@ -21,6 +23,7 @@ interface App {
     todaysTasks: Array<Task>;
     events: Map<CalendarDate, CalendarEvent>;
     showingSidebar: boolean;
+    themeColor: Color;
 }
 
 export interface Toast {
@@ -37,6 +40,7 @@ export const app = writable<App>({
     ],
     events: new Map(),
     showingSidebar: false,
+    themeColor: 'orange',
 });
 
 export const notifications = writable<Toast[]>([]);
