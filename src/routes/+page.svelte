@@ -25,27 +25,11 @@
     let lastScrollLeft = 0;
     let lastScrollTime = Date.now();
     let currentMonth = months[new Date().getUTCMonth()];
+    let start = Date.now();
 
     app.subscribe(value => {
         width = value.showingSidebar ? `calc(100% - 271px)` : '100%';
     });
-
-    // runs every 100 milliseconds
-    const update = () => {
-        if (Date.now() - lastScrollTime > 300) {
-            const width = document.getElementsByClassName('column')[0].clientWidth;
-            viewport.scroll({
-                left: ((viewport.scrollLeft % width) < (width/2)) 
-                    ? (viewport.scrollLeft - (viewport.scrollLeft % width)) 
-                    : (viewport.scrollLeft + width - (viewport.scrollLeft % width)),
-                top: 0,
-                behavior: 'smooth',
-            });
-        }
-        setTimeout(update, 100);
-    };
-
-    onMount(update);
 </script>
 
 <main>
@@ -59,12 +43,35 @@
 
                 lastScrollLeft = viewport.scrollLeft;
                 lastScrollTime = Date.now();
+
+                setTimeout(() => {
+                    if (Date.now() - lastScrollTime > 300) {
+                        const width = (viewport.scrollWidth - 59) / ($app.viewportDays + 2);
+                        viewport.scroll({
+                            left: ((viewport.scrollLeft % width) < (width/2)) 
+                                ? (viewport.scrollLeft - (viewport.scrollLeft % width)) 
+                                : (viewport.scrollLeft + width - (viewport.scrollLeft % width)),
+                            top: viewport.scrollTop,
+                            behavior: 'smooth',
+                        });
+                    }
+                }, 300);
+
+                const width = (viewport.scrollWidth - 59) / ($app.viewportDays + 2);
+
+                if (viewport.scrollLeft === 0) {
+                    viewport.scroll(width, viewport.scrollTop);
+                    start -= 1 * 60 * 60 * 24 * 1000;
+                } else if (viewport.scrollLeft === viewport.scrollWidth - viewport.clientWidth) {
+                    viewport.scroll(width, viewport.scrollTop);
+                    start += 1 * 60 * 60 * 24 * 1000;
+                }
             }}>
                 <TimeBar></TimeBar>
-                {#each [...Array(365).keys()] as i}
+                {#each [...Array($app.viewportDays + 2).keys()] as _, i}
                     <Column 
-                        dateObj={new Date((19_358 + i)*8.64e7)} 
-                        date="{days[new Date((19_358 + i)*8.64e7).getDay()]} {new Date((19_358 + i)*8.64e7).getUTCDate()}"
+                        dateObj={new Date(start + (i * 60 * 60 * 24 * 1000))} 
+                        date="{days[new Date(start + (i * 60 * 60 * 24 * 1000)).getDay()]} {new Date(start + (i * 60 * 60 * 24 * 1000)).getUTCDate()}"
                     /> 
                 {/each}
             </div>

@@ -92,7 +92,7 @@
 
         font-size: 12px;
         font-family: var(--font-sans);
-        font-weight: 500;
+        font-weight: 400;
         color: white;
 
         user-select: none;

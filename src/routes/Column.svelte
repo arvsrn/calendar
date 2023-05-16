@@ -173,7 +173,7 @@
     }
 
     main.dark {
-        background: #141414;
+        background: #121212;
     }
 
     main::-webkit-scrollbar,
@@ -232,10 +232,6 @@
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.025);
         z-index: 6;
-    }
-
-    main.dark > p {
-        background: #141414;
     }
 
     p.active {
