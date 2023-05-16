@@ -73,8 +73,8 @@
         <div class="new" style:top="{dragStartPosition}px" style:height="{(dragEndPosition - dragStartPosition) - ((dragEndPosition - dragStartPosition) % 15)}px"></div>
         {/if}
         
-        {#each [...Array(24).keys()] as i}
-        <div class="divider" style:top="{60 * i}px"></div>
+        {#each [...Array(23).keys()] as i}
+        <div class="divider" style:top="{60 + 60 * i}px"></div>
         {/each}
     </div>
 
@@ -211,6 +211,7 @@
         width: calc(100% + 4px);
         background: rgba(255, 255, 255, 0.025);
         flex: none;
+        transform: translateX(-2px);
         position: absolute;
         pointer-events: none;
     }
@@ -233,7 +234,7 @@
         top: 0;
         background: #141414;
 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.025);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         z-index: 6;
     }
 

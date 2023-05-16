@@ -35,7 +35,7 @@
 
     const resetDay = () => start = Date.now() - 1 * 60 * 60 * 24 * 1000;
 
-    $: start, currentMonth = months[new Date(start).getUTCMonth()];
+    $: start, currentMonth = months[new Date(start + (60*60*24*1000)).getUTCMonth()];
     $: start, currentYear = new Date(start).getUTCFullYear();
 </script>
 
@@ -95,6 +95,7 @@
     }
     else if (event.code.startsWith('Digit')) {
         const number = parseInt(event.key);
+        if (number === 0) return;
         const difference = number - $app.viewportDays;
         incrementViewportDays(difference);
     }

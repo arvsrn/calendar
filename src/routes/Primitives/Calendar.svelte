@@ -1,5 +1,32 @@
 <script lang="ts">
     export let resetDay: () => void = () => {};
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const monthDays: number[] = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const percentages: number[] = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+    let currentMonth: number = new Date().getMonth();
+    let monthsOfTheYear: Array<Array<boolean>> = [];
+
+    for (const days of monthDays) {
+        monthsOfTheYear.push([]);
+
+        for (let i = 0; i < days; i++) 
+            monthsOfTheYear[monthsOfTheYear.length - 1].push(false);
+    }
+    
+    let offset = 2;
+
+    const onCurrentMonthUpdate = () => {
+        if (currentMonth < 0) currentMonth = 0;
+        else if (currentMonth > 11) currentMonth = 11;
+
+        const date = new Date();
+        offset = new Date(date.getFullYear(), currentMonth, 1).getDay() - 1;
+    };
+
+    $: currentMonth, onCurrentMonthUpdate();
 </script>
 
 <div class="calendar-container">

@@ -32,7 +32,7 @@
         background: #141414;
 
         height: fit-content;
-        padding-top: 28px;
+        padding-top: calc(28px - 7.5px); /* height of date bar - half of the height of one p elemet */
 
         position: sticky;
         left: 0;
