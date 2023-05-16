@@ -24,18 +24,25 @@
 
     let lastScrollLeft = 0;
     let lastScrollTime = Date.now();
-    let currentMonth = months[new Date().getUTCMonth()];
     let start = Date.now();
+
+    let currentYear = new Date(start).getUTCFullYear();
+    let currentMonth = months[new Date(start).getUTCMonth()];
 
     app.subscribe(value => {
         width = value.showingSidebar ? `calc(100% - 271px)` : '100%';
     });
+
+    const resetDay = () => start = Date.now() - 1 * 60 * 60 * 24 * 1000;
+
+    $: start, currentMonth = months[new Date(start).getUTCMonth()];
+    $: start, currentYear = new Date(start).getUTCFullYear();
 </script>
 
 <main>
     <Sidebar></Sidebar>
     <div class="viewport" style:width={width}>
-        <Navbar bind:currentMonth={currentMonth}></Navbar>
+        <Navbar bind:currentMonth={currentMonth} bind:currentYear={currentYear} {resetDay}></Navbar>
         <div class="viewport-inner">
             <!-- preventDefault might cause some bugs lol but it works rn so idc -->
             <div id="viewport" bind:this={viewport} on:scroll|preventDefault={event => {

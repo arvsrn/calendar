@@ -19,6 +19,7 @@
     let showingSettingsMenu: boolean = false;
     export let currentMonth: string;
     export let currentYear: number = 2023;
+    export let resetDay: () => void;
 </script>
 
 <main>
@@ -36,12 +37,12 @@
                 <div style:width="260px" style:position="absolute" style:top="calc(100% + 2px)" style:left="-4px" style:z-index="297">
                     <Main onClickOutside={() => showingCalendarMenu = false} style="background: #1c1c1c;">
                         <div style:padding="8px 12px">
-                            <Calendar></Calendar>
+                            <Calendar {resetDay}></Calendar>
                         </div>
                     </Main>
                 </div>
                 {:else}
-                <button transition:fade={{ duration: 80 }}>
+                <button transition:fade={{ duration: 80 }} on:click={resetDay}>
                     <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.5 3.5C2.5 3.5 5 3.5 7 3.5C9 3.5 9.5 5.16667 9.5 6V6.5C9.5 7.16667 9.1 8.5 7.5 8.5H6.5M1.5 3.5L4.5 0.5M1.5 3.5L4.5 6.5" stroke="currentColor"/>
                     </svg>                

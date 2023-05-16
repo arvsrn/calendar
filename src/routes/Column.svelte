@@ -38,11 +38,14 @@
     let dragStartPosition: number = 0;
     let dragEndPosition: number = 0;
     let hovering: boolean = false;
+    let currentDate: Date = new Date();
 </script>
 
 <main class="column" bind:this={self} class:dark={['Sun', 'Sat'].includes(date.split(" ")[0])} on:mouseenter={() => hovering = true} on:mouseleave={() => hovering = false}>
     <!-- TODO: make active class for current day -->
-    <p class:active={dateObj.getUTCDate() == new Date().getUTCDate()}>{date}</p>
+    <p class:active={dateObj.getFullYear() === currentDate.getFullYear() &&
+        dateObj.getMonth() === currentDate.getMonth() &&
+        dateObj.getDate() === currentDate.getDate()}>{date}</p>
 
     <div on:contextmenu|preventDefault|self={event => {
         showing = true;
