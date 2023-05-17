@@ -55,15 +55,15 @@
         </nav>
         <div class="divider" style:margin="4px 0px"></div>
         <div class="content-inner">
-            <!--
-            <div style="background:rgba(255, 255, 255, 0.025);height:fit-content;width:100%;border-radius:12px;display:flex;flex-direction:row;padding:40px;gap:40px;display:flex;flex-direction:column;">
-                <img style="width:64px;height:64px;border-radius:32px;" draggable="false" src="https://res.cloudinary.com/read-cv/image/upload/c_fill,h_92,w_92/dpr_1.0/v1/1/profilePhotos/UmuuDwC2ozQnJxRRFIiBSGsMhg62/647f7013-3b34-460e-8fe3-664ab0560d82.jpg?_a=ATO2BAA0" alt="">
-                <div style="display:flex;flex-direction:column;gap:12px;">
-                    <p style="font-size:16px;font-weight:500;color:#ededed;">Aarav Sareen</p>
-                    <p style="font-size:16px;font-weight:500;color:#7e7e7e;">duclit451@gmail.com</p>
+            {#if selected == 0}
+            <div style="background:#202020;height:fit-content;width:100%;border-radius:12px;display:flex;flex-direction:row;padding:40px;gap:32px;display:flex;flex-direction:column;">
+                <img style="width:64px;height:64px;border-radius:32px;cursor:default;" draggable="false" src="https://res.cloudinary.com/read-cv/image/upload/c_fill,h_92,w_92/dpr_1.0/v1/1/profilePhotos/UmuuDwC2ozQnJxRRFIiBSGsMhg62/647f7013-3b34-460e-8fe3-664ab0560d82.jpg?_a=ATO2BAA0" alt="">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <p style="font-size:16px;font-weight:500;color:#ededed;cursor:default;">Aarav Sareen</p>
+                    <p style="font-size:16px;font-weight:500;color:#7e7e7e;cursor:default;">duclit451@gmail.com</p>
                 </div>
             </div>
-            -->
+            {/if}
         </div>
     </div>
 </main>
@@ -105,7 +105,7 @@
     div.content-inner {
         width: 100%;
         height: 100%;
-        padding: 24px;
+        padding: 6px 24px;
 
         display: flex;
         flex-direction: column;

@@ -41,13 +41,12 @@
                         </div>
                     </Main>
                 </div>
-                {:else}
+                {/if}
                 <button transition:fade={{ duration: 80 }} on:click={resetDay}>
                     <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.5 3.5C2.5 3.5 5 3.5 7 3.5C9 3.5 9.5 5.16667 9.5 6V6.5C9.5 7.16667 9.1 8.5 7.5 8.5H6.5M1.5 3.5L4.5 0.5M1.5 3.5L4.5 6.5" stroke="currentColor"/>
-                    </svg>                
+                    </svg>
                 </button>
-                {/if}
             </div>
         </span>
     </h1>

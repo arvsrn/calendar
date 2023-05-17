@@ -5,7 +5,8 @@
         "July", "August", "September", "October", "November", "December"
     ];
     const monthDays: number[] = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const percentages: number[] = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+
+    let currentYear: number = 2023;    
     let currentMonth: number = new Date().getMonth();
     let monthsOfTheYear: Array<Array<boolean>> = [];
 
@@ -19,17 +20,38 @@
     let offset = 2;
 
     const onCurrentMonthUpdate = () => {
-        if (currentMonth < 0) currentMonth = 0;
-        else if (currentMonth > 11) currentMonth = 11;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear -= 1;
+        }
+        else if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear += 1;
+        }
 
-        const date = new Date();
-        offset = new Date(date.getFullYear(), currentMonth, 1).getDay() - 1;
+        offset = new Date(currentYear, currentMonth, 1).getDay();
     };
 
     $: currentMonth, onCurrentMonthUpdate();
 </script>
 
 <div class="calendar-container">
+    <div style="width:100%;height:fit-content;display:flex;flex-direction:row;gap:4px;padding:4px;align-items:center;">
+        <p style="color:#ededed;font-weight:600;">{monthNames[currentMonth]} {currentYear}</p>
+        <div style:margin-left="auto" style="display:flex;flex-direction:row;gap:4px;align-items:center;">
+            <button on:click={() => currentMonth -= 1}>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.81809 4.18179C8.99383 4.35753 8.99383 4.64245 8.81809 4.81819L6.13629 7.49999L8.81809 10.1818C8.99383 10.3575 8.99383 10.6424 8.81809 10.8182C8.64236 10.9939 8.35743 10.9939 8.1817 10.8182L5.1817 7.81819C5.09731 7.73379 5.0499 7.61933 5.0499 7.49999C5.0499 7.38064 5.09731 7.26618 5.1817 7.18179L8.1817 4.18179C8.35743 4.00605 8.64236 4.00605 8.81809 4.18179Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+            <button on:click={() => currentMonth += 1}>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.18194 4.18185C6.35767 4.00611 6.6426 4.00611 6.81833 4.18185L9.81833 7.18185C9.90272 7.26624 9.95013 7.3807 9.95013 7.50005C9.95013 7.6194 9.90272 7.73386 9.81833 7.81825L6.81833 10.8182C6.6426 10.994 6.35767 10.994 6.18194 10.8182C6.0062 10.6425 6.0062 10.3576 6.18194 10.1819L8.86374 7.50005L6.18194 4.81825C6.0062 4.64251 6.0062 4.35759 6.18194 4.18185Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+            <button on:click={resetDay}>
+                <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 3.5C2.5 3.5 5 3.5 7 3.5C9 3.5 9.5 5.16667 9.5 6V6.5C9.5 7.16667 9.1 8.5 7.5 8.5H6.5M1.5 3.5L4.5 0.5M1.5 3.5L4.5 6.5" stroke="currentColor"/>
+                </svg>                
+            </button>
+        </div>
+    </div>
     <main>
         <div class="row">
             <div class="label dark static">Su</div>
@@ -40,66 +62,27 @@
             <div class="label dark static">Fr</div>
             <div class="label dark static">Sa</div>
         </div>
+        {#each [...Array(Math.ceil(monthDays[currentMonth]/7)).keys()] as _, i}
         <div class="row">
-            <div class="label dark">30</div>
-            <div class="label active">1</div>
-            <div class="label">2</div>
-            <div class="label">3</div>
-            <div class="label">4</div>
-            <div class="label">5</div>
-            <div class="label">6</div>
+            {#if i == 0 && offset} 
+                {#each [...Array(offset).keys()] as _, x}
+                    <div class="label dark">{31 - offset + x}</div>
+                {/each}
+                {#each [...Array(7-offset).keys()] as _, j}
+                    <div class="label">{7 * i + j + 1}</div>
+                {/each}
+            {:else}
+                {#each [...Array(7).keys()] as _, j}
+                    {#if (7 * i + j + 1) <= monthDays[currentMonth]}
+                        <div class="label">{7 * i + j + 1}</div>
+                    {:else}
+                        <div class="label dark">{(7 * i + j + 1) - monthDays[currentMonth]}</div>
+                    {/if}
+                {/each}
+            {/if}
         </div>
-        <div class="row">
-            <div class="label">7</div>
-            <div class="label">8</div>
-            <div class="label">9</div>
-            <div class="label">10</div>
-            <div class="label">11</div>
-            <div class="label">12</div>
-            <div class="label">13</div>
-        </div>
-        <div class="row">
-            <div class="label">14</div>
-            <div class="label">15</div>
-            <div class="label">16</div>
-            <div class="label">17</div>
-            <div class="label">18</div>
-            <div class="label">19</div>
-            <div class="label">20</div>
-        </div>
-        <div class="row">
-            <div class="label">21</div>
-            <div class="label">22</div>
-            <div class="label">23</div>
-            <div class="label">24</div>
-            <div class="label">25</div>
-            <div class="label">26</div>
-            <div class="label">27</div>
-        </div>
-        <div class="row">
-            <div class="label">28</div>
-            <div class="label">29</div>
-            <div class="label">30</div>
-            <div class="label">31</div>
-            <div class="label dark">1</div>
-            <div class="label dark">2</div>
-            <div class="label dark">3</div>
-        </div>
+        {/each}
     </main>
-
-    <div style="width:fit-content;height:100%;display:flex;flex-direction:column;gap:4px;padding:4px 0px;">
-        <button>
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.18179 8.81819C4.00605 8.64245 4.00605 8.35753 4.18179 8.18179L7.18179 5.18179C7.26618 5.0974 7.38064 5.04999 7.49999 5.04999C7.61933 5.04999 7.73379 5.0974 7.81819 5.18179L10.8182 8.18179C10.9939 8.35753 10.9939 8.64245 10.8182 8.81819C10.6424 8.99392 10.3575 8.99392 10.1818 8.81819L7.49999 6.13638L4.81819 8.81819C4.64245 8.99392 4.35753 8.99392 4.18179 8.81819Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-        </button>
-        <button>
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.18179 6.18181C4.35753 6.00608 4.64245 6.00608 4.81819 6.18181L7.49999 8.86362L10.1818 6.18181C10.3575 6.00608 10.6424 6.00608 10.8182 6.18181C10.9939 6.35755 10.9939 6.64247 10.8182 6.81821L7.81819 9.81821C7.73379 9.9026 7.61934 9.95001 7.49999 9.95001C7.38064 9.95001 7.26618 9.9026 7.18179 9.81821L4.18179 6.81821C4.00605 6.64247 4.00605 6.35755 4.18179 6.18181Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-        </button>
-        <button style:margin-top="auto" on:click={resetDay}>
-            <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.5 3.5C2.5 3.5 5 3.5 7 3.5C9 3.5 9.5 5.16667 9.5 6V6.5C9.5 7.16667 9.1 8.5 7.5 8.5H6.5M1.5 3.5L4.5 0.5M1.5 3.5L4.5 6.5" stroke="currentColor"/>
-            </svg>                
-        </button>
-    </div>
 </div>
 
 <style>
@@ -160,8 +143,8 @@
         height: fit-content;
 
         display: flex;
-        flex-direction: row;
-        gap: 4px;
+        flex-direction: column;
+        gap: 2px;
     }
 
     button {
