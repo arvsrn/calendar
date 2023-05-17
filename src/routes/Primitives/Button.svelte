@@ -29,7 +29,7 @@
         font-size: 12px;
         line-height: 14px;
         
-        color: #EDEDED;
+        color: var(--text1);
         text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.27);
         user-select: none;
         border: none;

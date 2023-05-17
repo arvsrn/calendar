@@ -1,8 +1,8 @@
 <script lang="ts">
     import Main from './DropdownMenu/Main.svelte';
     import Option from './DropdownMenu/Option.svelte';
-  import Blanket from './Primitives/Blanket.svelte';
-  import SettingsMenu from './SettingsMenu.svelte';
+    import Blanket from './Primitives/Blanket.svelte';
+    import SettingsMenu from './Settings.svelte';
 
     let showing: boolean = false;
     let showingSettingsMenu: boolean = false;

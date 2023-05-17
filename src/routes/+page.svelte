@@ -14,7 +14,6 @@
     import EditTask from "./Popups/EditTask.svelte";
     import DeleteTask from "./Popups/DeleteTask.svelte";
     import { app, incrementViewportDays } from "../core";
-    import SettingsMenu from "./SettingsMenu.svelte";
     import { getVelocity } from "../engine";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

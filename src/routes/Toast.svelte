@@ -48,7 +48,7 @@
     main > button {
         padding: 0px;
         background: transparent;
-        color: #a0a0a0;
+        color: var(--text2);
         font-weight: 500;
         width: fit-content;
         height: fit-content;
@@ -71,8 +71,8 @@
 
         position: relative;
 
-        background-color: #232323;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background-color: var(--gray3);
+        border: 1px solid var(--border2);
         box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
         border-radius: 8px;
 
@@ -101,14 +101,14 @@
         font-size: 13px;
         font-weight: 500;
 
-        color: #ededed;
+        color: var(--text1);
     }
 
     p {
         font-size: 13px;
         font-weight: normal;
 
-        color: #a0a0a0;
+        color: var(--text2);
     }
 
     button {
@@ -126,7 +126,7 @@
         width: 32px;
         height: 32px;
 
-        color: #a0a0a0;
+        color: var(--text2);
         transition: background-color 0.15s ease-in-out;
 
         display: none; 
@@ -137,8 +137,8 @@
     }
 
     button:hover {
-        color: #ededed;
-        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--text1);
+        background-color: var(--border2);
     }
     
     @media only screen and (max-width: 450px) {

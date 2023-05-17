@@ -24,7 +24,33 @@ body {
     height: fit-content;
     min-height: 100%;
 
-    background: #1c1c1c;
+    background: var(--gray2);
+}
+
+body.dark {
+    --gray0: #141414;
+    --gray1: #161616;
+    --gray2: #1c1c1c;
+    --gray3: #232323;
+    --border1: rgba(255, 255, 255, 0.025);
+    --border2: rgba(255, 255, 255, 0.05);
+    --border3: rgba(255, 255, 255, 0.1);
+
+    --text1: #ededed;
+    --text2: #a0a0a0;
+}
+
+body.light {
+    --gray0: #f4f4f4;
+    --gray1: #fcfcfc;
+    --gray2: #fff;
+    --gray3: #fafafa;
+    --border1: rgba(0, 0, 0, 0.025);
+    --border2: rgba(0, 0, 0, 0.05);
+    --border3: rgba(0, 0, 0, 0.1);
+
+    --text1: #161616;
+    --text2: #666666;
 }
 
 /* stagger animation */

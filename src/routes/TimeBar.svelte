@@ -27,9 +27,9 @@
         flex: none;
         overflow: visible;
 
-        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        border-right: 1px solid var(--border2);
 
-        background: #141414;
+        background: var(--gray1);
 
         height: fit-content;
         padding-top: calc(28px - 7.5px); /* height of date bar - half of the height of one p elemet */
@@ -63,7 +63,7 @@
         padding-right: 6px;
 
         font-family: var(--font-sans);
-        color: #7e7e7e;
+        color: var(--text2);
         user-select: none;
     }
 

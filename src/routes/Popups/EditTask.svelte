@@ -5,7 +5,7 @@
 </script>
 
 <Popup>
-    <h1 style="margin-bottom:8px;font-size:14px;color:#ededed;font-weight:bold;">Edit Task</h1>
+    <h1 style="margin-bottom:8px;font-size:14px;color:var(--text1);font-weight:bold;">Edit Task</h1>
     <TextInput placeholder="This is a normal task."></TextInput>
     <div style="margin-left:auto;display:flex;flex-direction:row;gap:4px;">
         <Button appearance="link">Cancel</Button>

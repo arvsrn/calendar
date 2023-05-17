@@ -172,11 +172,11 @@
 
         flex: none;
         position: relative;
-        background: #141414;
+        background: var(--gray1);
     }
 
     main.dark {
-        background: #121212;
+        background: var(--gray0);
     }
 
     main::-webkit-scrollbar,
@@ -195,13 +195,13 @@
         gap: 60px;
         
         overflow: hidden;
-        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        border-right: 1px solid var(--border2);
     }
 
     div.new {
         width: 100%;
         position: absolute;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--border2);
         margin-top: -2px;
         margin-left: -2px;
     }
@@ -209,7 +209,7 @@
     div.divider {
         height: 1px;
         width: calc(100% + 4px);
-        background: rgba(255, 255, 255, 0.025);
+        background: var(--border2);
         flex: none;
         transform: translateX(-2px);
         position: absolute;
@@ -225,21 +225,21 @@
 
         font-size: 12px;
         font-family: var(--font-sans);
-        color: rgba(255, 255, 255, 0.4);
+        color: var(--text2);
 
         flex: none;
         user-select: none;
 
         position: sticky;
         top: 0;
-        background: #141414;
+        background: var(--gray1);
 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid var(--border2);
         z-index: 6;
     }
 
     p.active {
-        color: white;
+        color: var(--text1);
     }
 
     p.active::before {
@@ -249,7 +249,7 @@
         width: 6px;
         height: 6px;
         border-radius: 6px;
-        background: white;
+        background: var(--text1);
         margin-right: 4px;
     }
 </style>

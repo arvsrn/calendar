@@ -8,7 +8,7 @@
     import Calendar from "./Primitives/Calendar.svelte";
     import { fade } from "svelte/transition";
     import Blanket from "./Primitives/Blanket.svelte";
-    import SettingsMenu from "./SettingsMenu.svelte";
+    import SettingsMenu from "./Settings.svelte";
 
     onMount(() => {
         incrementViewportDays(0);
@@ -30,12 +30,12 @@
                 <button class="x" on:click={() => showingCalendarMenu = true}>
                     W32
                     <svg width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.5 0.5L3.5 3.5L6.5 0.5" stroke="#a0a0a0"/>
+                        <path d="M0.5 0.5L3.5 3.5L6.5 0.5" stroke="var(--text2)"/>
                     </svg>                        
                 </button>
                 {#if showingCalendarMenu}
                 <div style:width="260px" style:position="absolute" style:top="calc(100% + 2px)" style:left="-4px" style:z-index="297">
-                    <Main onClickOutside={() => showingCalendarMenu = false} style="background: #1c1c1c;">
+                    <Main onClickOutside={() => showingCalendarMenu = false} style="background: var(--gray2);">
                         <div style:padding="8px 12px">
                             <Calendar {resetDay}></Calendar>
                         </div>
@@ -89,9 +89,9 @@
         padding-right: 12px;
         flex: none;
 
-        background: #141414;
+        background: var(--gray1);
 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid var(--border2);
     }
 
     h1, p, span {
@@ -104,13 +104,18 @@
     h1 {
         font-size: 18px;
         font-weight: 600;
-        color: #ededed;
+        color: var(--text1);
     }
 
     h1 > span {
         font-size: 18px;
         font-weight: normal;
-        color: #a0a0a0;
+        color: var(--text2);
+    }
+
+    /* why does this not work???? */ 
+    :global(body.light h1 > span > div.container > button.x) {
+        border: 1px solid var(--border3);
     }
 
     h1 > span > div.container > button.x {
@@ -119,7 +124,7 @@
         padding: 3px 7px;
         margin-left: -4px;
 
-        border: 1px solid rgba(255, 255, 255, 0.075);
+        border: 1px solid var(--border2);
         background: transparent;
         border-radius: 6px;
         
@@ -129,7 +134,7 @@
 
         font-size: 13px;
         font-weight: normal;
-        color: #ededed;
+        color: var(--text1);
         transition: background 0.1s var(--ease);
 
         display: flex;
@@ -158,7 +163,7 @@
 
     p {
         font-size: 14px;
-        color: #ededed;
+        color: var(--text1);
         font-family: var(--font-mono);
         user-select: none;
     }
@@ -183,7 +188,7 @@
 
         background: transparent;
         cursor: pointer;
-        color: #A0A0A0;
+        color: var(--text2);
 
         display: flex;
         flex-direction: column;
@@ -192,7 +197,7 @@
     }
 
     button:hover, h1 > span > div.container > button:hover {
-        background: rgba(255, 255, 255, 0.06);
+        background: var(--border2);
     }
 
     h1 > span > div.container > button:hover {
@@ -203,7 +208,7 @@
         height: 50px;
         margin: 0px 12px;
         width: 1px;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--border2);
         flex: none;
     }
 </style>

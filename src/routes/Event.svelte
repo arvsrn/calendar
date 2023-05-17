@@ -154,7 +154,7 @@
 {#if showing}
 <div style="width:172px;height:fit-content;position:fixed;left:{mouse[0]}px;top:{mouse[1]}px;z-index:200;">
     <Main onClickOutside={() => showing = false}>
-        <p style="color:#a0a0a0;padding:4px 12px;">{
+        <p style="color:var(--text2);padding:4px 12px;">{
             Math.floor(finalStartTime/60) <= 12 ? 
                 Math.floor(finalStartTime/60) 
                 : Math.floor(finalStartTime/60) - 12
@@ -168,7 +168,7 @@
         }{Math.floor(((finalEndTime/60)%1)*60) !== 0 ? `:${Math.floor(((finalEndTime/60)%1)*60) < 10 ? '0' + Math.floor(((finalEndTime/60)%1)*60) : Math.floor(((finalEndTime/60)%1)*60)}` : ''}{
             Math.floor(finalEndTime/60) < 12 ? 'AM' : 'PM'
         }</p>
-        <p style="color:#a0a0a0;padding:0px 12px;">{Math.floor((finalEndTime - finalStartTime) / 60)}h {Math.floor((finalEndTime - finalStartTime) % 60)}mins</p>
+        <p style="color:var(--text2);padding:0px 12px;">{Math.floor((finalEndTime - finalStartTime) / 60)}h {Math.floor((finalEndTime - finalStartTime) % 60)}mins</p>
 
         <div style="height:1px;width:100%;background:rgba(255, 255, 255, 0.035);margin:12px 0px;"></div>
 
@@ -233,10 +233,10 @@
 {#if editing}
 <Blanket bind:toggle={editing}>
     <Popup onSlideOut={() => editing = false}>
-        <h1 style="margin-bottom:8px;font-size:14px;color:#ededed;font-weight:bold;">Edit Event</h1>
+        <h1 style="margin-bottom:8px;font-size:14px;color:var(--text1);font-weight:bold;">Edit Event</h1>
         <TextInput bind:value={nameInputValue} placeholder="Event name"></TextInput>
         <MultilineTextInput bind:value={descriptionInputValue} placeholder="Event description"></MultilineTextInput>
-        <h1 style="margin-bottom:8px;margin-top:16px;font-size:14px;color:#ededed;font-weight:bold;">Tasks for this Event</h1>
+        <h1 style="margin-bottom:8px;margin-top:16px;font-size:14px;color:var(--text1);font-weight:bold;">Tasks for this Event</h1>
         <TodoTask editable={true}>This is a task assigned to this event.</TodoTask>
         <TodoTask editable={true}>This is a task assigned to this event.</TodoTask>
         <TodoTaskNew></TodoTaskNew>
@@ -271,7 +271,7 @@
         cursor: grab;
         overflow: hidden;
         z-index: 2;
-        border-top: 1px solid rgba(255, 255, 255, 0.025);
+        border-top: 1px solid var(--border2);
 
         transition: background 0.15s var(--ease);
     }
@@ -329,7 +329,7 @@
     }
 
     h1, p {
-        color: white;
+        color: var(--text1);
         user-select: none;
 
         width: fit-content;

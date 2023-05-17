@@ -83,7 +83,7 @@
         width: 100%;
         height: 50px;
 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid var(--border2);
     
         display: flex;
         flex-direction: row;
@@ -96,8 +96,8 @@
         width: 271px;
         height: 100vh;
         
-        background: #141414;
-        border-right: 1px solid rgba(255, 255, 255, 0.075);
+        background: var(--gray0);
+        border-right: 1px solid var(--border2);
 
         flex: none;
 
@@ -118,7 +118,7 @@
         font-size: 14px;
         font-weight: 500;
         font-family: var(--font-sans);
-        color: #ededed;
+        color: var(--text1);
         line-height: 50px;
 
         user-select: none;
@@ -145,7 +145,7 @@
         width: 100%;
         word-wrap: break-word;
         font-size: 12px;
-        color: #a0a0a0;
+        color: var(--text2);
         margin-top: -14px;
     }
 </style>

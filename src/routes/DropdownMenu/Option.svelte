@@ -34,11 +34,11 @@
     }
 
     main.normal {
-        color: #ededed;
+        color: var(--text1);
     }
 
     main:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--border2);
     }
 
     main.danger {
@@ -48,7 +48,7 @@
     main > p {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-size: 12.5px;
-        color: #a0a0a0;
+        color: var(--text2);
         margin-left: auto;
     }
 </style>

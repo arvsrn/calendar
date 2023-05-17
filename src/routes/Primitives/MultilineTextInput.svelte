@@ -17,13 +17,13 @@
         font-size: 13px;
         line-height: 16px;
 
-        color: #EDEDED;
+        color: var(--text1);
         
         outline: none;
         background: #232323;
         padding: 10px 10px;
         
-        border: 1px solid rgba(255, 255, 255, 0.025);
+        border: 1px solid var(--border2);
         border-radius: 6px;
 
         transition: box-shadow 0.15s var(--ease),
@@ -38,13 +38,13 @@
     div[contenteditable]:hover,
     div[contenteditable]:active,
     div[contenteditable]:focus {
-        border: 1.5px solid rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--border2);
         background: #252525;
     }
 
     div[contenteditable]:empty::before {
         content: attr(data-placeholder);
-        color: #7e7e7e;
+        color: var(--text2);
         cursor: text;
     }
 </style>

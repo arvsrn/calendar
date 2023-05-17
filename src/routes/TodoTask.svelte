@@ -43,7 +43,7 @@
     }
 
     main:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--border2);
     }
 
     div.check-container {
@@ -53,7 +53,7 @@
 
     button {
         outline: none;
-        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        border: 1.5px solid var(--border3);
         border-radius: 5px;
 
         width: 16px;
@@ -61,7 +61,7 @@
 
         background: transparent;
         cursor: pointer;
-        color: #EDEDED;
+        color: var(--text1);
 
         display: flex;
         flex-direction: column;
@@ -97,12 +97,12 @@
 
         font-size: 13px;
         font-weight: normal;
-        color: #ededed;
+        color: var(--text1);
         line-height: 16px;
     }
 
     p.enabled {
-        color: #a0a0a0;
+        color: var(--text2);
         text-decoration: line-through;
     }
 
@@ -155,7 +155,7 @@
 
     p[contenteditable]:empty:before {
         content: "Delete this task?";
-        color: #7e7e7e;
+        color: var(--text2);
         cursor: text;
     }
 </style>

@@ -35,9 +35,9 @@
     main {
         overflow: hidden;
         outline: none;
-        background: #232323;
+        background: var(--gray3);
         
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border2);
         box-shadow: 0px 13px 5px rgba(0, 0, 0, 0.01), 
             0px 7px 4px rgba(0, 0, 0, 0.05), 
             0px 3px 3px rgba(0, 0, 0, 0.09), 

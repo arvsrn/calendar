@@ -24,12 +24,12 @@
         height: 4px;
         
         border-radius: 5px;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--border2);
     }
 
     p {
         font-size: 10px;
-        color: #a0a0a0;
+        color: var(--text2);
         user-select: none;
         line-height: 16px;
     }
