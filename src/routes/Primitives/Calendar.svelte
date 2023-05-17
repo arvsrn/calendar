@@ -45,7 +45,11 @@
             <button on:click={() => currentMonth += 1}>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.18194 4.18185C6.35767 4.00611 6.6426 4.00611 6.81833 4.18185L9.81833 7.18185C9.90272 7.26624 9.95013 7.3807 9.95013 7.50005C9.95013 7.6194 9.90272 7.73386 9.81833 7.81825L6.81833 10.8182C6.6426 10.994 6.35767 10.994 6.18194 10.8182C6.0062 10.6425 6.0062 10.3576 6.18194 10.1819L8.86374 7.50005L6.18194 4.81825C6.0062 4.64251 6.0062 4.35759 6.18194 4.18185Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
             </button>
-            <button on:click={resetDay}>
+            <button on:click={() => {
+                const date = new Date();
+                currentYear = date.getFullYear();
+                currentMonth = date.getMonth();
+            }}>
                 <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.5 3.5C2.5 3.5 5 3.5 7 3.5C9 3.5 9.5 5.16667 9.5 6V6.5C9.5 7.16667 9.1 8.5 7.5 8.5H6.5M1.5 3.5L4.5 0.5M1.5 3.5L4.5 6.5" stroke="currentColor"/>
                 </svg>                
@@ -62,21 +66,21 @@
             <div class="label dark static">Fr</div>
             <div class="label dark static">Sa</div>
         </div>
-        {#each [...Array(Math.ceil(monthDays[currentMonth]/7)).keys()] as _, i}
+        {#each [...Array(Math.ceil(monthDays[currentMonth]/7) + 1).keys()] as _, i}
         <div class="row">
             {#if i == 0 && offset} 
                 {#each [...Array(offset).keys()] as _, x}
-                    <div class="label dark">{31 - offset + x}</div>
+                    <div class="label dark" on:click={() => currentMonth -= 1}>{31 - offset + x}</div>
                 {/each}
                 {#each [...Array(7-offset).keys()] as _, j}
                     <div class="label">{7 * i + j + 1}</div>
                 {/each}
             {:else}
                 {#each [...Array(7).keys()] as _, j}
-                    {#if (7 * i + j + 1) <= monthDays[currentMonth]}
-                        <div class="label">{7 * i + j + 1}</div>
+                    {#if ((7 * (i - 1)) + (7 - offset) + j + 1) <= monthDays[currentMonth]}
+                        <div class="label">{(7 * (i - 1)) + (7 - offset) + j + 1}</div>
                     {:else}
-                        <div class="label dark">{(7 * i + j + 1) - monthDays[currentMonth]}</div>
+                        <div class="label dark" on:click={() => currentMonth += 1}>{(7 * i + j + 1) - monthDays[currentMonth]}</div>
                     {/if}
                 {/each}
             {/if}
