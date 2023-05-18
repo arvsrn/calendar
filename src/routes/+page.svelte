@@ -14,7 +14,6 @@
     import EditTask from "./Popups/EditTask.svelte";
     import DeleteTask from "./Popups/DeleteTask.svelte";
     import { app, incrementViewportDays } from "../core";
-    import { getVelocity } from "../engine";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -33,6 +32,7 @@
     });
 
     const resetDay = () => start = Date.now() - 1 * 60 * 60 * 24 * 1000;
+    const setDay = (to: Date) => start = +to;
 
     $: start, currentMonth = months[new Date(start + (60*60*24*1000)).getUTCMonth()];
     $: start, currentYear = new Date(start).getUTCFullYear();
@@ -41,7 +41,7 @@
 <main>
     <Sidebar></Sidebar>
     <div class="viewport" style:width={width}>
-        <Navbar bind:currentMonth={currentMonth} bind:currentYear={currentYear} {resetDay}></Navbar>
+        <Navbar bind:currentMonth={currentMonth} bind:currentYear={currentYear} {resetDay} {setDay}></Navbar>
         <div class="viewport-inner">
             <!-- preventDefault might cause some bugs lol but it works rn so idc -->
             <div id="viewport" bind:this={viewport} on:scroll|preventDefault={event => {

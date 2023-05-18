@@ -1,5 +1,7 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
+  import Blanket from "./Primitives/Blanket.svelte";
+  import Shortcut from "./Shortcut.svelte";
   
     export let close: () => void;
 
@@ -12,7 +14,7 @@
         Changelog = "Changelog",
     }
     
-    let selected: Tab = Tab.General;
+    let selected: Tab = Tab.Shortcuts;
     let showingAccountSettings: boolean = false;
 </script>
 
@@ -62,6 +64,30 @@
     </section>
     <section class="content">
         <h1>{selected}</h1>
+        {#if selected === Tab.Shortcuts}
+        <div style="display:flex;flex-direction:column;gap:16px;">
+            <div style="display:flex;flex-direction:row;width:100%;align-items:center;">
+                <p class="text" style:width="60%">Open/close sidebar</p>
+                <Shortcut>ctrl b</Shortcut>
+            </div>
+            <div style="display:flex;flex-direction:row;width:100%;align-items:center;">
+                <p class="text" style:width="60%">Open settings menu</p>
+                <Shortcut>ctrl s</Shortcut>
+            </div>
+            <div style="display:flex;flex-direction:row;width:100%;align-items:center;">
+                <p class="text" style:width="60%">Increment days in viewport</p>
+                <Shortcut>ctrl +</Shortcut>
+            </div>
+            <div style="display:flex;flex-direction:row;width:100%;align-items:center;">
+                <p class="text" style:width="60%">Decrement days in viewport</p>
+                <Shortcut>ctrl -</Shortcut>
+            </div>
+            <div style="display:flex;flex-direction:row;width:100%;align-items:center;">
+                <p class="text" style:width="60%">Set days in viewport</p>
+                <Shortcut>ctrl 1-9</Shortcut>
+            </div>
+        </div>
+        {/if}
     </section>
 </main>
 
@@ -82,6 +108,15 @@
         color: var(--text2);
         width: 164px;
         margin-bottom: 8px;
+    }
+
+    p.text {
+        margin: 0px !important;
+        font-size: 14px;
+        color: var(--text1);
+        user-select: text;
+        font-weight: normal;
+        width: 100%;
     }
 
     section.sidebar > div.divider {
@@ -118,6 +153,7 @@
         height: 100%;
         background: var(--gray1);
         padding: 64px;
+        gap: 8px;
     }
 
     div.account {
@@ -187,11 +223,11 @@
         right: 64px;
         top: 64px;
 
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
         background: var(--border2);
         color: var(--text2);
-        border-radius: 16px;
+        border-radius: 20px;
 
         align-items: center;
         justify-content: center;

@@ -20,6 +20,7 @@
     export let currentMonth: string;
     export let currentYear: number = 2023;
     export let resetDay: () => void;
+    export let setDay: (to: Date) => void;
 </script>
 
 <main>
@@ -37,7 +38,7 @@
                 <div style:width="260px" style:position="absolute" style:top="calc(100% + 2px)" style:left="-4px" style:z-index="297">
                     <Main onClickOutside={() => showingCalendarMenu = false} style="background: var(--gray2);">
                         <div style:padding="8px 12px">
-                            <Calendar {resetDay}></Calendar>
+                            <Calendar {setDay}></Calendar>
                         </div>
                     </Main>
                 </div>

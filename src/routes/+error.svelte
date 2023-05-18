@@ -1,6 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import { onMount } from "svelte";
+  import Loader from "./Loader.svelte";
     
     onMount(() => {
         window.location.assign(`/?error=${$page.status}`);
@@ -8,7 +9,7 @@
 </script>
 
 <main>
-    <div></div>
+    <Loader></Loader>
 </main>
 
 <style>
@@ -16,7 +17,7 @@
         width: 100vw;
         height: 100vh;
 
-        background: var(--gray1);
+        background: var(--gray0);
 
         display: flex;
         flex-direction: column;
@@ -26,24 +27,5 @@
 
         overflow-y: auto;
         position: relative;
-    }
-
-    @keyframes donut-spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    div {
-        display: inline-block;
-        border: 4px solid rgba(255, 255, 255, 0.1);
-        border-left-color: white;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        animation: donut-spin 1.2s linear infinite;
     }
 </style>

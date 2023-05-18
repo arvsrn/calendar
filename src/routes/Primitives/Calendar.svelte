@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let resetDay: () => void = () => {};
+    export let setDay: (to: Date) => void;
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -73,12 +73,12 @@
                     <div class="label dark" on:click={() => currentMonth -= 1}>{31 - offset + x}</div>
                 {/each}
                 {#each [...Array(7-offset).keys()] as _, j}
-                    <div class="label">{7 * i + j + 1}</div>
+                    <div class="label" on:click={() => setDay(new Date(currentYear, currentMonth, 7 * i + j + 1))}>{7 * i + j + 1}</div>
                 {/each}
             {:else}
                 {#each [...Array(7).keys()] as _, j}
                     {#if ((7 * (i - 1)) + (7 - offset) + j + 1) <= monthDays[currentMonth]}
-                        <div class="label">{(7 * (i - 1)) + (7 - offset) + j + 1}</div>
+                        <div class="label" on:click={() => setDay(new Date(currentYear, currentMonth, (7 * (i - 1)) + (7 - offset) + j + 1))}>{(7 * (i - 1)) + (7 - offset) + j + 1}</div>
                     {:else}
                         <div class="label dark" on:click={() => currentMonth += 1}>{(7 * i + j + 1) - monthDays[currentMonth]}</div>
                     {/if}
