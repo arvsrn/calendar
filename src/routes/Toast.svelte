@@ -14,7 +14,7 @@
     {/if}
     {#each $notifications as notification, i} 
         {#if $notifications.length - 3 <= i} <!--last 3 elements-->
-            <div transition:slide={{ duration: 85 }} class="toast" style="--index:{Math.min($notifications.length - 1, 2) - (Math.min($notifications.length, 3) - ($notifications.length - i))};">
+            <div transition:slide={{ duration: 120 }} class="toast" style="--index:{Math.min($notifications.length - 1, 2) - (Math.min($notifications.length, 3) - ($notifications.length - i))};">
                 <h1>{notification.heading}</h1>
                 {#if notification.description}
                     <p>{notification.description}</p>

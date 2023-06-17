@@ -20,15 +20,15 @@
         color: var(--text1);
         
         outline: none;
-        background: #232323;
-        padding: 10px 10px;
+        background: var(--border2);
+        padding: 10px 12px;
         
-        border: 1px solid var(--border2);
+        border: none;
         border-radius: 6px;
 
         transition: box-shadow 0.15s var(--ease),
             border 0.15s var(--ease),
-            background var(--ease);
+            background 0.15s var(--ease);
     }
 
     div[contenteditable]::placeholder {
@@ -38,8 +38,7 @@
     div[contenteditable]:hover,
     div[contenteditable]:active,
     div[contenteditable]:focus {
-        border: 1.5px solid var(--border2);
-        background: #252525;
+        background: var(--border3);
     }
 
     div[contenteditable]:empty::before {

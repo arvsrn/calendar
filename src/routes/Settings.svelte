@@ -59,7 +59,7 @@
         </div>
         <button out:fade={{ duration: 100 }} data-animate style:--stagger={1.5}>Add account</button>
         <button class="danger" out:fade={{ duration: 100 }} data-animate style:--stagger={2.0}>Log out</button>
-        <button class="danger" out:fade={{ duration: 100 }} data-animate style:--stagger={2.5}>Delete this account</button>
+        <button class="danger" out:fade={{ duration: 100 }} data-animate style:--stagger={2.5}>Delete account</button>
         {/if}
     </section>
     <section class="content">
@@ -103,11 +103,15 @@
     }
 
     p {
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 500;
         color: var(--text2);
         width: 164px;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
+    }
+
+    section.sidebar > p {
+        text-transform: uppercase;
     }
 
     p.text {
@@ -145,7 +149,7 @@
         height: 100%;
         border-right: 1px solid var(--border2);
         align-items: flex-end;
-        gap: 4px;
+        gap: 2px;
     }
 
     section.content {
@@ -171,7 +175,7 @@
     }
 
     div.account:hover {
-        background: var(--border3);
+        background: var(--border2);
     }
 
     img {
@@ -198,7 +202,7 @@
         user-select: none;
         
         font-size: 13px;
-        font-weight: 450;
+        font-weight: 400;
         color: var(--text2);
         border-radius: 8px;
 
@@ -215,7 +219,7 @@
 
     button:hover, .active {
         color: var(--text1);
-        background: var(--border3);
+        background: var(--border2);
     }
 
     button.close {
@@ -225,7 +229,7 @@
 
         width: 40px;
         height: 40px;
-        background: var(--border2);
+        background: var(--border1);
         color: var(--text2);
         border-radius: 20px;
 
@@ -235,7 +239,7 @@
     }
 
     button.close:hover {
-        background: var(--border3);
+        background: var(--border2);
         color: var(--text1);
     }
 

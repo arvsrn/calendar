@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import { onMount } from "svelte";
-  import Loader from "./Loader.svelte";
+    import Loader from "./Loader.svelte";
     
     onMount(() => {
         window.location.assign(`/?error=${$page.status}`);

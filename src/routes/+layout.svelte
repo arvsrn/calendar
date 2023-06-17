@@ -1,13 +1,13 @@
 <script lang="ts">
     import { page } from "$app/stores";
-  import { onMount } from "svelte";
+    import { onMount } from "svelte";
     import { addNotification, notifications } from "../core";
     // TODO: uncomment these lines for prod
     // import { dev } from '$app/environment';
     // import { inject } from '@vercel/analytics';
     import Toast from "./Toast.svelte";
-  import Loader from "./Loader.svelte";
-  import { fade } from "svelte/transition";
+    import Loader from "./Loader.svelte";
+    import { fade } from "svelte/transition";
     
     // inject({ mode: dev ? 'development' : 'production' });
 
@@ -18,15 +18,16 @@
     });
 
     let mounted: boolean = false;
+
     onMount(() => mounted = true);
 </script>
 
 {#if mounted}
     <slot></slot>
 {:else}
-<main out:fade>
-    <Loader></Loader>
-</main>
+    <main out:fade>
+        <Loader></Loader>
+    </main>
 {/if}
 
 <Toast></Toast>

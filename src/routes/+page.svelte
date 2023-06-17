@@ -11,9 +11,8 @@
     import Popup from "./Primitives/Popup.svelte";
     import Button from "./Primitives/Button.svelte";
     import TextInput from "./Primitives/TextInput.svelte";
-    import EditTask from "./Popups/EditTask.svelte";
-    import DeleteTask from "./Popups/DeleteTask.svelte";
     import { app, incrementViewportDays } from "../core";
+  import CommandMenu from "./CommandMenu.svelte";
 
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -52,7 +51,7 @@
 
                 setTimeout(() => {
                     if (Date.now() - lastScrollTime > 300) {
-                        const width = (viewport.scrollWidth - 59) / ($app.viewportDays + 2);
+                        const width = (viewport.scrollWidth - 60) / ($app.viewportDays + 2);
                         viewport.scroll({
                             left: ((viewport.scrollLeft % width) < (width/2)) 
                                 ? (viewport.scrollLeft - (viewport.scrollLeft % width)) 
@@ -101,6 +100,12 @@
     else if (event.code == 'KeyB' && event.ctrlKey)
         $app.showingSidebar = !$app.showingSidebar;
 }} />
+
+<!--
+<Blanket toggle>
+    <CommandMenu></CommandMenu>
+</Blanket>
+-->
 
 <style>
     main {

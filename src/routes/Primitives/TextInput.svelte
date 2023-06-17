@@ -6,6 +6,7 @@
     export let state: 'normal' | 'error' = 'normal';
     export let tip: string = "";
     export let size: 'default' | 'small' | 'large' = "default";
+    export let style: string = "";
 
     export let spellcheck: boolean = false;
     export let isRequired: boolean = false;
@@ -43,7 +44,7 @@
         </label>
     {/if}   
 
-    <input bind:this={self} class={size} bind:value={value} {placeholder} {spellcheck} type="text" name={id} {id} on:keydown={event => {
+    <input {style} bind:this={self} class={size} bind:value={value} {placeholder} {spellcheck} type="text" name={id} {id} on:keydown={event => {
         if (!self.selectionStart || !smartInput) return;
 
         // TODO: maxLength attribute
@@ -132,15 +133,15 @@
         color: var(--text1);
         
         outline: none;
-        background: #232323;
-        padding: 0px 10px;
+        background: var(--border2);
+        padding: 0px 12px;
         
-        border: 1px solid var(--border2);
+        border: none;
         border-radius: 6px;
 
         transition: box-shadow 0.15s var(--ease),
             border 0.15s var(--ease),
-            background var(--ease);
+            background 0.15s var(--ease);
     }
 
     input[type="text"]::placeholder {
@@ -150,8 +151,7 @@
     input[type="text"]:hover,
     input[type="text"]:active,
     input[type="text"]:focus {
-        border: 1.5px solid var(--border2);
-        background: #252525;
+        background: var(--border3);
     }
 
     input[type="text"].small {

@@ -36,7 +36,7 @@
     button {
         outline: none;
         border: 1.5px solid var(--border3);
-        border-radius: 5px;
+        border-radius: 6px;
 
         width: 16px;
         height: 16px;

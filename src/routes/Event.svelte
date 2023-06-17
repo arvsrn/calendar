@@ -13,6 +13,8 @@
     import { addNotification, type CalendarEvent } from "../core";
     import { clickOutside } from "svelte-use-click-outside";
     import { fade } from "svelte/transition";
+  import Tooltip from "./Primitives/Tooltip.svelte";
+  import Heading from "./DropdownMenu/Heading.svelte";
 
     type COLORS = 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'gray';
     const COLORS: Array<COLORS> = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'gray'];
@@ -79,9 +81,11 @@
 
     export let name: string = "";
     export let description: string = "";
+    export let location: string = "";
 
     let nameInputValue: string = name;
     let descriptionInputValue: string = description;
+    let locationInputValue: string = location;
 
     $: height = (finalEndTime - finalStartTime);
     $: finalEndTime = endTime - (endTime % 15)
@@ -118,6 +122,9 @@
     };
 
     export let onDelete: () => void;
+
+    let visibilityBusy: boolean = false;
+    let showingEditRecurrenceMenu: boolean = false;
 </script>
 
 <main on:contextmenu|preventDefault={event => {
@@ -233,21 +240,60 @@
 {#if editing}
 <Blanket bind:toggle={editing}>
     <Popup onSlideOut={() => editing = false}>
-        <h1 style="margin-bottom:8px;font-size:14px;color:var(--text1);font-weight:bold;">Edit Event</h1>
+        <h1 style="font-size:14px;color:var(--text1);font-weight:bold;">Edit Event</h1>
+        <div class="divider"></div>
+        
         <TextInput bind:value={nameInputValue} placeholder="Event name"></TextInput>
         <MultilineTextInput bind:value={descriptionInputValue} placeholder="Event description"></MultilineTextInput>
-        <h1 style="margin-bottom:8px;margin-top:16px;font-size:14px;color:var(--text1);font-weight:bold;">Tasks for this Event</h1>
-        <TodoTask editable={true}>This is a task assigned to this event.</TodoTask>
-        <TodoTask editable={true}>This is a task assigned to this event.</TodoTask>
-        <TodoTaskNew></TodoTaskNew>
+        <TextInput bind:value={locationInputValue} placeholder="Location"></TextInput>
 
-        <div style="margin-left:auto;display:flex;flex-direction:row;gap:4px;margin-top:8px;">
-            <Button appearance="link" onClick={() => editing = false}>Cancel</Button>
-            <Button appearance="secondary" onClick={() => {
-                name = nameInputValue || name;
-                description = descriptionInputValue || description;
-                editing = false;
-            }}>Save</Button>
+        <div class="divider"></div>
+
+        <div style="display:flex;flex-direction:column;gap:4px;">
+            <TodoTask editable={true}>This is a task assigned to this event.</TodoTask>
+            <TodoTask editable={true}>This is a task assigned to this event.</TodoTask>
+            <TodoTaskNew></TodoTaskNew>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="display:flex;flex-direction:row;gap:4px;">
+            <div class="relative-container">
+                <Tooltip tooltip="Change recurrence" bind:hideIf={showingEditRecurrenceMenu}>
+                    <button on:click={() => showingEditRecurrenceMenu = true}>
+                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.90321 7.29677C1.90321 10.341 4.11041 12.4147 6.58893 12.8439C6.87255 12.893 7.06266 13.1627 7.01355 13.4464C6.96444 13.73 6.69471 13.9201 6.41109 13.871C3.49942 13.3668 0.86084 10.9127 0.86084 7.29677C0.860839 5.76009 1.55996 4.55245 2.37639 3.63377C2.96124 2.97568 3.63034 2.44135 4.16846 2.03202L2.53205 2.03202C2.25591 2.03202 2.03205 1.80816 2.03205 1.53202C2.03205 1.25588 2.25591 1.03202 2.53205 1.03202L5.53205 1.03202C5.80819 1.03202 6.03205 1.25588 6.03205 1.53202L6.03205 4.53202C6.03205 4.80816 5.80819 5.03202 5.53205 5.03202C5.25591 5.03202 5.03205 4.80816 5.03205 4.53202L5.03205 2.68645L5.03054 2.68759L5.03045 2.68766L5.03044 2.68767L5.03043 2.68767C4.45896 3.11868 3.76059 3.64538 3.15554 4.3262C2.44102 5.13021 1.90321 6.10154 1.90321 7.29677ZM13.0109 7.70321C13.0109 4.69115 10.8505 2.6296 8.40384 2.17029C8.12093 2.11718 7.93465 1.84479 7.98776 1.56188C8.04087 1.27898 8.31326 1.0927 8.59616 1.14581C11.4704 1.68541 14.0532 4.12605 14.0532 7.70321C14.0532 9.23988 13.3541 10.4475 12.5377 11.3662C11.9528 12.0243 11.2837 12.5586 10.7456 12.968L12.3821 12.968C12.6582 12.968 12.8821 13.1918 12.8821 13.468C12.8821 13.7441 12.6582 13.968 12.3821 13.968L9.38205 13.968C9.10591 13.968 8.88205 13.7441 8.88205 13.468L8.88205 10.468C8.88205 10.1918 9.10591 9.96796 9.38205 9.96796C9.65819 9.96796 9.88205 10.1918 9.88205 10.468L9.88205 12.3135L9.88362 12.3123C10.4551 11.8813 11.1535 11.3546 11.7585 10.6738C12.4731 9.86976 13.0109 8.89844 13.0109 7.70321Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    </button>
+                </Tooltip>
+
+                {#if showingEditRecurrenceMenu}
+                <div style:width="200px" style:position="absolute" style:top="calc(100% - 4px)" style:transform="translateX(-50%)" style:left="50%" style:z-index="297">
+                    <Main onClickOutside={() => showingEditRecurrenceMenu = false}>
+                        <Option>Every day</Option>
+                        <Option>Every weekday</Option>
+                        <Option>Every weekend</Option>
+                        <Option>Every saturday</Option>
+                        <Option>Monthly on the 17th</Option>
+                        <Option>Yearly on 17th June</Option>
+                    </Main>
+                </div>
+                {/if}
+            </div>
+            <div class="relative-container">
+                <Tooltip tooltip="Visibility">
+                    <button class="hug-x" on:click={() => visibilityBusy = !visibilityBusy}>
+                        {visibilityBusy ? 'Busy' : 'Available'}
+                    </button>
+                </Tooltip>
+            </div>
+
+            <div style="margin-left:auto;display:flex;flex-direction:row;gap:4px;">
+                <Button appearance="link" onClick={() => editing = false}>Cancel</Button>
+                <Button appearance="secondary" onClick={() => {
+                    name = nameInputValue || name;
+                    description = descriptionInputValue || description;
+                    editing = false;
+                }}>Save</Button>
+            </div>
         </div>
     </Popup>
 </Blanket>
@@ -435,5 +481,50 @@
 
     main.gray > div.side-color {
         background: #b8b8b8;
+    }
+
+    div.divider {
+        width: 100%;
+        height: 1px;
+        background: var(--border2);
+        margin: 8px 0px;
+    }
+
+    div.relative-container {
+        position: relative;
+    }
+
+    button {
+        outline: none;
+        border: none;
+        border-radius: 6px;
+
+        width: 24px;
+        height: 24px;
+
+        background: transparent;
+        cursor: pointer;
+        color: var(--text2);
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 6px;
+        gap: 4px;
+
+        transition: background 0.15s var(--ease);
+    }
+
+    button:hover {
+        background: var(--border2);
+    }
+
+    button.hug-x {
+        width: fit-content !important;
+    }
+
+    button > * {
+        flex: none;
     }
 </style>

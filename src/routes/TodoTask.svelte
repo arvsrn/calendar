@@ -27,7 +27,7 @@
 
 <style>
     main {
-        width: 100%;
+        width: calc(100% + 12px);
         height: fit-content;
 
         display: flex;
@@ -35,9 +35,9 @@
         gap: 8px;
 
         position: relative;
-        padding: 5px;
-        transform: translate(-5px, -5px);
-        border-radius: 10px;
+        padding: 6px;
+        transform: translate(-6px, -6px);
+        border-radius: 12px;
         transition: background 0.15s var(--ease);
         cursor: pointer;
     }
@@ -54,7 +54,7 @@
     button {
         outline: none;
         border: 1.5px solid var(--border3);
-        border-radius: 5px;
+        border-radius: 6px;
 
         width: 16px;
         height: 16px;

@@ -33,11 +33,11 @@
 
 <style>
     main {
-        overflow: hidden;
+        overflow: visible;
         outline: none;
         background: var(--gray3);
         
-        border: 1px solid var(--border2);
+        border: 1px solid var(--border1);
         box-shadow: 0px 13px 5px rgba(0, 0, 0, 0.01), 
             0px 7px 4px rgba(0, 0, 0, 0.05), 
             0px 3px 3px rgba(0, 0, 0, 0.09), 
@@ -52,7 +52,7 @@
         display: flex;
         flex-direction: column;
 
-        animation: enter 0.05s var(--ease) 1;
+        animation: enter 0.15s var(--ease) 1;
         z-index: 101;
         cursor: default;
     }

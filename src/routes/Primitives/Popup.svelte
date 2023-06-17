@@ -40,7 +40,7 @@
         height: fit-content;
 
         background: var(--gray2);
-        border: 1px solid var(--border2);
+        border: 1px solid var(--border1);
         border-radius: 12px;
         box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
 
